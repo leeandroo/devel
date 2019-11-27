@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\User;
+use App\Servicio;
+use App\ServicioUser;
 
 class InterfazController extends Controller
 {
@@ -25,70 +28,59 @@ class InterfazController extends Controller
 
     public function get_user_profile()
     {
-        // 
-        $detalle_usuario = DB::table('detalle_usuario')->where('detalle_usuario.iduser', '=', Auth::user()->iduser)->first();
-        return view('pages.profile.user-profile', compact('detalle_usuario'));
+        return view('pages.profile.user-profile');
     }
-
 
     public function get_mydate_page() 
     {
-        $citas_agendadas = DB::table('cita as ct')
-        ->join('orden_trabajo as ot', 'ct.idcita', '=', 'ot.idcita')
-        ->join('user as e', 'ot.idempleado', '=', 'e.iduser')
-        ->select('ct.*', 'ot.fecha', 'ot.hora_inicio', 'e.name', 'e.lastname')
-        ->where('ct.estado_cita', 'Agendada')
-        ->where('ct.iduser', Auth::user()->iduser)
-        ->paginate(3);
-
-        $citas_nuevas = DB::table('cita as ct')
-        ->where('ct.estado_cita', 'Nueva')
-        ->where('ct.iduser', Auth::user()->iduser)
-        ->paginate(3);
-        
-        return view('pages.profile.cliente.mydate', compact('citas_agendadas', 'citas_nuevas'));
+        $servicios = Servicio::get();
+        return view('pages.profile.cliente.mydate', compact('servicios'));
     }
 
     public function get_all_dates()
     {
-        $citas_agendadas = DB::table('cita as ct')
-        ->join('orden_trabajo as ot', 'ct.idcita', '=', 'ot.idcita')
-        ->join('user as e', 'ot.idempleado', '=', 'e.iduser')
-        ->join('user as cl', 'ct.iduser', '=', 'cl.iduser')
-        ->select('ct.*', 'ot.fecha', 'ot.hora_inicio', 'e.name as nombre_empleado', 'e.lastname as apellido_empleado', 'cl.name as nombre_cliente', 'cl.lastname as apellido_cliente')
-        ->where('ct.estado_cita', 'Agendada')
-        ->paginate(3);
-
-        $citas_nuevas = DB::table('cita as ct')
-        ->join('user as u', 'ct.iduser', '=', 'u.iduser')
-        ->join('detalle_usuario as dt', 'u.iduser', '=', 'dt.iduser')
-        ->select('dt.*', 'ct.*', 'u.*')
-        ->where('ct.estado_cita', 'Nueva')
-        ->paginate(3);
-
-        $trabajadores = DB::table('user as u')
-        ->where('u.type', 'Trabajador')
-        ->get();
-
-        return view('pages.profile.admin.dates', compact('citas_nuevas', 'citas_agendadas', 'trabajadores'));
+        $citas = ServicioUser::get();
+        foreach($citas as $cita){
+            $cita->user = User::find($cita->user_id);
+            $cita->servicio = Servicio::find($cita->servicio_id);
+        }
+        
+        
+        return view('pages.profile.admin.dates', compact('citas'));
     }
 
     public function get_tasks()
     {
         if(Auth::user())
         {
-            $citas = DB::table('orden_trabajo as ot')
-            ->join('cita as ct', 'ot.idcita','=','ct.idcita')
-            ->join('user as u', 'ct.iduser', '=', 'u.iduser')
-            ->join('detalle_usuario as du', 'du.iduser', '=', 'u.iduser')
-            ->join('user as e', 'ot.idempleado', '=','e.iduser')
-            ->select('ot.*', 'ct.servicio', 'ct.descripcion', 'ct.estado_whatsapp', 'u.name', 'u.lastname', 'u.email', 'u.rut', 'du.direccion', 'du.telefono', 'du.tipo_cliente')
-            ->where('ot.idempleado', '=', Auth::user()->iduser)
-            ->where('ot.estado', '=', 'Pendiente')
-            ->where('ot.estado', '=', 'En proceso')
-            ->orderBy('ot.fecha', 'asc')
-            ->paginate(5);
-            return view('pages.profile.worker.tasks', compact('citas'));
+            $citas = ServicioUser::where('responsable_id', Auth::user()->id)->get();
+            $events = [];
+            foreach($citas as $cita){
+                $events[] = \Calendar::event(
+                    Servicio::find($cita->servicio_id)->tipo, //event title
+                    false, //full day event?
+                    new \DateTime($cita->fecha."".$cita->hora_inicio), //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
+                    new \DateTime($cita->fecha."".$cita->hora_termino), //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
+                    $cita->id, //optional event ID
+                    [
+                        'url' => '/details'."/".$cita->id,
+                        'color' => "#".Servicio::find($cita->servicio_id)->color,
+                        'cliente' => User::find($cita->user_id)->name." ".User::find($cita->user_id)->lastname,
+                        'servicio' => Servicio::find($cita->servicio_id)->nombre,
+                    ]
+                );
+            }
+            
+
+            $calendar = \Calendar::addEvents($events)
+            ->setOptions([
+                'lang' => 'es',
+                'timeFormat' => 'LT',
+                'navLinks' => true,
+            ])->setCallbacks([
+                'eventRender' => 'function(event, element) {element.find(".fc-title").append("<br/>" + event.cliente + "<br/>" + event.servicio );}',
+            ]);
+            return view('pages.profile.worker.tasks', compact('calendar'));
         }else{
             return redirect('/');
         }

@@ -52,107 +52,26 @@
         .tareas {
             margin-bottom: 20px;
         }
-    
+
+        .ot-title {
+            font-family: 'Century Gothic';
+            font-size: 30px;  
+            margin-bottom: 0px;
+        }
+
+
     </style>
 </head>
 <body>
-    <div class="info-cliente">
-        <h1>Orden de trabajo</h1>
-        <hr>
-        <table>
-            <tbody>
-                <tr>
-                    <th colspan="2" class="cabecera">Información del cliente</th>
-                </tr>
-                @foreach($ot as $cliente)
-                <tr>
-                    @if($cliente->type = "Cliente")
-                        <th>Nombre cliente</th>
-                        <td>{{ $cliente->name.' '.$cliente->lastname }}</td>
-                    @endif
-                </tr>
-                <tr>
-                    @if($cliente->type = "Cliente")
-                        <th>RUT</th>
-                        <td>{{ $cliente->rut}}</td>
-                    @endif
-                </tr>
-                <tr>
-                    @if($cliente->type = "Cliente")
-                        <th>Tipo cliente</th>
-                        <td>{{ $cliente->tipo_cliente}}</td>
-                    @endif
-                </tr>
-                @endforeach
-                <tr>
-                    <th colspan="2" class="cabecera">Información de contacto</th>
-                </tr>
-
-                @foreach($ot as $cliente)
-                <tr>
-                    @if($cliente->type = "Cliente")
-                        <th>Teléfono</th>
-                        <td>{{ $cliente->telefono }}</td>
-                    @endif
-                </tr>
-                <tr>
-                    @if($cliente->type = "Cliente")
-                        <th>Correo</th>
-                        <td>{{ $cliente->email }}</td>
-                    @endif
-                </tr>
-                <tr>
-                    @if($cliente->type = "Cliente")
-                        <th>Whatsapp habilitado</th>
-                        @if($cliente->estado_whatsapp == 1)
-                            <td>Si</td>
-                        @else
-                            <td>No</td>
-                        @endif
-                    @endif
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="ot-header">
+        <p class="ot-title">
+            Orden de trabajo <br>
+            <p class="ot-subtitle"> <span class="black-text">Electro</span> Global</p>
+            <img src="" alt="">
+        </p>
+        
     </div>
-
-    <div class="info-servicio">
-        <table>
-            <tbody>
-                <tr>
-                    <th colspan="2" class="cabecera">Información del servicio</th>
-                </tr>
-                @foreach($ot as $ot)
-                <tr>
-                    <th>N° de orden</th>
-                    <td>{{ $ot->idorden_trabajo }}</td>
-                </tr>
-                <tr>
-                    <th>Fecha</th>
-                    <td>{{ $ot->fecha }}</td>
-                </tr>
-                <tr>
-                    <th>Costo base</th>
-                    <td>{{ '$'.$ot->precio }}</td>
-                </tr>
-                <tr>
-                    <th>Responsable</th>
-                    <td>{{ $ot->nombre_responsable.' '.$ot->apellido_responsable }}</td>
-                </tr>
-                <tr>
-                    <th colspan="2" class="cabecera">Descripción de la solicitud</th>
-                </tr>
-                <tr>
-                    @if($ot->descripcion == NULL)
-                        <td colspan="2  ">Sin descripción</td>
-                    @else
-                        <td colspan="2">{{ $ot->descripcion }}</td>
-                    @endif
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    
 
     <div class="insumos">
         <table>

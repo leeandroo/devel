@@ -1,12 +1,17 @@
 @extends('layouts.main')
-@section('titulo', 'Sermalet')
+@section('titulo', 'Electro Global')
 @section('contenido')
 	<!-- HEADER START -->
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar fixed-top">
+		<nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar fixed-top z-depth-0">
 			<div class="container">
 				<!-- Navbar brand -->
-				<a class="navbar-brand" href="#fondo"><i class="fas fa-bolt"></i></a>
+				<a class="navbar-brand" href="#fondo">
+					<i class="fas fa-globe icon-brand"></i> 
+					<div class="name-brand">
+						<p class="first-name">Eletro <span class="second-name">Global</span></p>
+					</div>
+				</a>
 				<!-- Collapse button -->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
 				aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,39 +20,39 @@
 				<!-- Collapsible content -->
 				<div class="collapse navbar-collapse" id="basicExampleNav">
 				<!-- Links -->
-					<ul class="navbar-nav mr-auto smooth-scroll">
+					<ul class="navbar-nav ml-auto smooth-scroll">
 						<!-- <li class="nav-item active">
 							<a class="nav-link" href="#" id="relawayBLK">INICIO
 							<span class="sr-only">(current)</span>
 							</a>
 						</li> -->
 						<li class="nav-item">
-							<a class="nav-link" href="#caracteristicas">NOSOTROS</a>
+							<a class="nav-link" href="#caracteristicas">Nosotros</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#diferencias">QUÉ NOS DIFERENCIA</a>
+							<a class="nav-link" href="#diferencias">Servicios</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#servicios">SERVICIOS</a>
+							<a class="nav-link" href="#servicios">Equipo</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#costos">PLANES Y COSTOS</a>
+							<a class="nav-link" href="#costos">Precios</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#agenda">AGENDA TU SERVICIO</a>
+							<a class="nav-link" href="#agenda">Comunidad</a>
 						</li>
 					</ul>
 					<!-- Links -->
 					@if(Auth::user())
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link" href="{{ url('/user-profile') }}">BIENVENIDO, <span class="text-uppercase">{{ Auth::user()->name }}</span></a>
-							</li>
-						</ul>
+						<form class="form-inline" action="{{ url('/user-profile') }}" method="get">
+							<div class="md-form my-0">
+								<button type="submit" class="btn" id="btn-sign-in">Mi perfil  <i class="fa fa-arrow-right ml-1 fa-fw"></i> </button>
+							</div>
+						</form>
 					@else
 						<form class="form-inline" action="{{ url('/login') }}" method="get">
 							<div class="md-form my-0">
-								<button type="submit" class="btn" id="btn-sign-in">Iniciar sesión</button>
+								<button type="submit" class="btn" id="btn-sign-in">Ingresar <i class="fa fa-sign-in-alt ml-1 fa-fw"></i></button>
 							</div>
 						</form>
 					@endif
@@ -58,112 +63,55 @@
 		<!--/.Navbar-->
 		<!--MASK-->
 		<div class="view" id="fondo">
-				<!-- Nombre empresa & formulario-->
-				<div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-						<!-- Content -->
-						<div class="container">
-						<!--Grid row-->
-						<div class="row pt-lg-5 mt-lg-5 align-items-center">
-							<!--Grid column-->
-							<div class="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left wow fadeInLeft" data-wow-delay="0.3s">
-								<!--descripcion-->
-								<form class="form-inline">
-									<div class="md-form my-0">
-										<h2 class="display-4 mb-3">Unete a nuestra red de clientes</h2>
-										<!--cabeza-->
-										<!--raya-->
-										<hr id="raya">
-										<!--raya-->
-										<!--descripcion-->
-										<p class="white-text">Registra tu cuenta de usuario y podras acceder a información relevante sobre nosotros.</p>
-										
-									</div>
-								</form>			
-							</div>
-							<!--Grid column-->
-							<!--Grid column-->
-							<div class="col-md-6 col-xl-5 mb-4">
-								<div class="card wow fadeInRight " data-wow-delay="0.3s">
-									<div class="card-body px-lg-5 pt-0">
-										<div class="form-row my-3">
-											<div class="col">
-												<h4 class="font-weight-bold text-center py-4" style="height: 5px;">
-													<strong class="">Información de contacto</strong>
-												</h4>
-											</div>
-										</div>
-										<div class="form-row my-3" id="robotoLGHT">
-											<div class="col">
-												<div class="text-left">
-													<h5 class="cyan-text" style="color: #FE4568">Horarios de atención</h5>
-													<p class="card-text">Atendemos llamadas en los siguientes horarios</p>
-													<ul class="">
-														<li>Lun-Vie, 08:30 - 00:00 hrs</li>
-														<li>Sab, 08:30 - 00:00 hrs</li>
-														<li>Dom, Cerrado</li>
-													</ul>
-												</div>	
-											</div>												  
-										</div>
-										<div class="form-row my-3" id="robotoLGHT">
-											<div class="col">
-												<div class="text-left">
-													<h5 class="cyan-text" style="color: #FE4568">Números de contacto</h5>
-													<p class="card-text">Comuniquese con nosotros de forma directa, a través de los siguientes números:</p>
-													<ul class="">
-														<li>Whatsapp, +569 94568561</li>
-														<li>Fono, +552 123456</li>
-														<li>Movil, +569 97845962</li>
-													</ul>
-												</div>	
-											</div>												  
-										</div>
-										<hr>
-										<div class="form-row my-3" id="robotoLGHT">
-											<div class="col">
-												<div class="text-left">
-													<p class="card-text text-center ">Siguenos en: </p>
-													<p class="card-text text-center">
-														<i class="fab fa-facebook fa-lg  mr-md-3 mr-4"> </i>
-														<i class="fab fa-twitter fa-lg  mr-md-3 mr-4"> </i>
-														<i class="fab fa-google-plus fa-lg  mr-md-3 mr-4"> </i>
-														<i class="fab fa-linkedin-in fa-lg  mr-md-3 mr-4"> </i>
-														<i class="fab fa-instagram  fa-lg  mr-md-3 mr-4"> </i>
-														<i class="fab fa-whatsapp fa-lg  mr-md-3 mr-4>"> </i>
-													</p>
-												</div>	
-											</div>												  
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--Grid column-->
-						</div>
-						<!--Grid row-->
-					</div>
-					<!-- Content -->
-				</div>
-				<!-- Nombre empresa & formulario-->
+			<div class="wrapper">
+				<div id="background"></div>
 			</div>
-    	<!--MASK-->
+			<div class="mask">
+				
+				<div class="row">
+					
+					<div class="col-lg-6">
+						<div class="banner">
+							<!--cabeza-->
+							<div class="banner-title mb-5">
+								<div class="banner-mark mb-4"></div>
+								<h2>Unete a nuestra red de</h2>
+								<h3>Colaboradores <span class="teal-text">Electro</span></h3>
+							</div>
+							<!--cabeza-->
+				
+							<!--descripcion-->
+							<p class="banner-text responsive-text">Registra tu cuenta de colaborador, podrás publicar y admimistrar tus propios servicios</h4>
+				
+							<!--descripcion-->
+							<div class="mt-5">
+								<button type="button" class="btn m-0 light-blue darken-3 white-text btn-lg">Registra tu cuenta <i class="ml-2 fa fa-arrow-right"></i></button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6"></div>
+				</div>
+				
+			</div>
+		</div>
 	</header>	
 	<!-- HEADER END -->
 
 	<!-- BODY START -->
-	<main class="mt-5">
+	<main class="mt-0">
 		<div class="container align-items-center">
 			<!--SECTION NOSOTROS START-->
 			<section id="caracteristicas" class="container text-left">
 					<!-- Section heading -->
 					<div class="row align-items-center my-5">
 						<div class="col-lg-6 col-md-12 mb-lg-0 mb-4">
-							<h2 class="title ">Acerca de nosotros</h2>
+							<h2 class="title">Acerca de nosotros</h2>
 							<div>
 								<hr class="ra d-inline-block">
 							</div>
 							<!-- Section description -->
 							<p class="grey-text text-left">
-							Sermalet es una empresa que entrega servicios eléctricos en la ciudad de Calama, dicha empresa, se encuentra constituida hace un año, sin embargo, sus operaciones comenzaron hace aproximadamente un mes y medio, ante lo anterior, la solicitud del proyecto nace en base a las siguientes razones:
+							Global Electro es una empresa que entrega servicios eléctricos en la ciudad de Calama, dicha empresa, se encuentra constituida hace un año, sin embargo, sus operaciones comenzaron hace aproximadamente un mes y medio, ante lo anterior, la solicitud del proyecto nace en base a las siguientes razones:
 							</p>
 							<p class="grey-text text-left">Aspiramos a</p>
 							<ul class="grey-text text-left">

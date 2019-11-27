@@ -11,178 +11,167 @@
     <!-- Material Design Bootstrap -->
     <link href="{{asset('dashboard/css/mdb.min.css')}}" rel="stylesheet">
     <link href="{{asset('dashboard/css/style.css')}}" rel="stylesheet">
+	<script type="text/javascript" src="{{asset('dashboard/js/jquery-3.3.1.min.js')}}"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <script src="{{asset('dashboard/js/all.js')}}"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
-<body class="fixed-sn white-skin grey lighten-4">
-    @include('components.alerts')
-	<!-- HEADER START -->
-	<!--Double navigation-->
-    <header>
-      	<!-- Sidebar navigation -->
-		<div id="slide-out" class="side-nav fixed z-depth-0 border border-1 overflow">
-			<div class="side-header mt-4">
-				<div class="avatar mx-auto white">
-					<img src="http://cepiem.com.ar/img/icono-rayo.png" alt="avatar mx-auto white" class="rounded-circle img-fluid z-depth-2">
-				</div>
-				<div class="user-profile text-center black-text">
-					<p class="user-name">
-						Semerlet App <br>
-						<span class="user-type grey-text">{{ Auth::user()->type }}</span>
-					</p>
-				</div>
-			</div>
-			
-			<div class="list-group " id="lista">
-				<a href="{{ url('/user-profile') }}" class="list-item mt-1 @yield('perfil')">
-					<i class="far fa-user ml-2 mr-4 fa-fw icono"></i>Mi perfil
-					<div class="list-mark"></div>
-				</a>
-				<!-- <a href="#" class="list-item black-text mt-1">
-					<i class="fas fa-plus ml-2 mr-4 fa-fw cyan-text"></i>Nueva cita
-					<div class="list-mark"></div>
-				</a> -->
-				@if(Auth::user()->type == 'Cliente')
-					<a href="{{ url('/user-profile/mis-citas') }}" class="list-item mt-1 @yield('citas')">
-						<i class="far fa-calendar-alt ml-2 mr-4 fa-fw icono"></i>Mi citas
-						<div class="list-mark"></div>
-					</a>
-					<a href="" class="list-item mt-1">
-						<i class="far fa-file-alt ml-2 mr-4 fa-fw icono"></i>Documentos 
-						<div class="list-mark"></div>
-					</a>
-				@elseif(Auth::user()->type == 'Admin')
-					<a href="{{ url('/admin-profile/insumo') }}" class="list-item mt-1 @yield('bodega')">
-						<i class="fas fa-dolly ml-2 mr-4 fa-fw icono"></i>Bodega
-						<div class="list-mark"></div>
-					</a>
-					<a href="{{ url('/user-profile/control-citas') }}" class="list-item mt-1 @yield('citas')">
-						<i class="far fa-calendar-alt ml-2 mr-4 fa-fw icono"></i>Control de citas
-						<div class="list-mark"></div>
-					</a>
-					<a href="#" class="list-item mt-1 @yield('orden')">
-						<i class="fas fa-tasks ml-2 mr-4 fa-fw icono"></i>Orden de trabajo 
-						<div class="list-mark"></div>
-					</a>
-				@elseif(Auth::user()->type == 'Trabajador')
-					<a href="{{ url('/user-profile/tareas') }}" class="list-item mt-1 @yield('tareas')">
-						<i class="fas fa-tasks ml-2 mr-4 fa-fw icono"></i>Tareas asignadas
-						<div class="list-mark"></div>
-					</a>
-				@endif
-				<a href="#" class="list-item mt-1 @yield('datos')">
-					<i class="fas fa-edit ml-2 mr-4 fa-fw icono"></i>Actualizar datos
-					<div class="list-mark"></div>
-				</a>
-				
-			</div>
-			
-			<div class="sidenav-bg mask-strong"></div>
-		</div>
-      	<!--/. Sidebar navigation -->
-      	<!-- Navbar -->
-      	<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav grey lighten-4 z-depth-0">
-			<!-- SideNav slide-out button -->
-			<div class="float-right">
-				<a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="fas fa-bars"></i></a>
-			</div>
-			<!--/. SideNav slide-out button-->
-
-			<!-- Breadcrumb-->
-			<div class="breadcrumb-dn">
-				<p>Devel<span class="cyan-text">UP</span></p>
-			</div>
-			<!--/. Breadcrumb-->
-
-			<!-- Dropdown button -->
-			<ul class="nav navbar-nav nav-flex-icons ml-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					Hola, {{Auth::user()->name}}
-					</a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item grey-text" href="#">
-							<i class="fas fa-cog"></i> Configuración
-						</a>
-						<a class="dropdown-item grey-text" href="#">
-							<i class="fas fa-bell"></i> Notificaciones
-						</a>
-
-					</div>
+	<body class="fixed-sn white-skin grey lighten-4">
+		<!--Double navigation-->
+		<header>
+			<!-- Sidebar navigation -->
+			<div id="slide-out" class="side-nav fixed z-depth-0">
+				<li>
+					<div class="logo-wrapper border-0 text-left">
+						<a href="#"><img src="{{asset('dashboard/img/logo.PNG')}}"
+							class="img-fluid flex-center m-0"></a>
+					</div>	
 				</li>
-			</ul>
-			<!--/. Dropdown button -->
-      	</nav>
-      	<!-- /.Navbar -->
-    </header>
-    <!--/.Double navigation-->
-	<!-- HEADER END -->	
-    
-	<!-- Content -->
-    <div class="main mt-4">
-		<div class="row">
-			<div class="col-lg-12">
-				@yield('boton-agregar')
-				<h1 class="page-title">@yield('title')</h1>
+				
+				@if(Auth::user()->type == 'Cliente')
+					@include('components.client-links')
+				@elseif(Auth::user()->type == 'Trabajador' || Auth::user()->type == 'Colaborador')
+					@include('components.colab-links')
+				@else
+					@include('components.admin-links')
+				@endif
+
+				<hr class="grey lighten-5 ml-3 mr-3">
+
+				<div class="opciones mb-4">
+					<a href="{{ url('/user-profile') }}" class="list-item mt-1 p-0">
+						<div class="list-mark float-left mr-4"></div>
+						<i class="fas fa-headset ml-2 mr-4 fa-fw icono"></i>Contacto
+					</a>
+					<a href="{{ url('/user-profile/mis-citas') }}" class="list-item mt-1 p-0">
+						<div class="list-mark float-left mr-4"></div>
+						<i class="fas fa-question ml-2 mr-4 fa-fw icono"></i>Soporte
+					</a>
+				</div>
+				
+				<form action="{{ route('logout') }}" method="post">
+					{!! csrf_field() !!}
+					<div class="md-form my-0 text-center" id="btn-logout">
+						<button type="submit" class="btn white border border-primary z-depth-0">Cerrar sesión <i class="fa fa-arrow-right ml-2"></i>  </button>
+					</div>
+				</form>
+				<div class="sidenav-bg mask-strong"></div>
 			</div>
-      	</div>
+			<!--/. Sidebar navigation -->
+			<!-- Navbar -->
+			
+			<!-- /.Navbar -->
+		</header>
+		<!--/.Double navigation-->
 
+		<!-- Content -->
+		<div class="main">
+			<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar z-depth-0" id="custom-nav-dashboard">
+				<div class="nav-content">
+					<div class="menu">
+						<a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+					</div>
+					<!-- SideNav slide-out button -->
+					<div class="nav-title">
+						@yield('title')
+					</div>
+					<!--/. SideNav slide-out button-->
 
-		<div class="row mb-0">
-			@yield('buscador')
+					<!-- Dropdown button -->
+					<ul class="navbar-nav float-right">
+						<li class="nav-item dropdown">
+							<a class="float-right" id="settings" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<i class="far fa-user"></i></a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+							<a class="dropdown-item" href="#">Cerrar sesión</a>
+							</div>
+						</li>
+					</ul>
+					<!--/. Dropdown button -->
+				</div>
+			</nav>  
+			<!-- <div class="row" id="carrusel">
+				<div class="col-lg-3 col-md-6 col-sm-6 col-12">
+					<div class="card light-blue darken-3 minicard mb-4" >
+						<div class="card-body light-blue darken-4 p-0">
+							<div class="minicard-icon d-flex justify-content-center">
+								<div class="circle p-1 light-blue darken-3">
+									<i class="fas fa-calendar-times white-text"></i>
+								</div>
+							</div>
+							<div class="minicard-content pt-3">
+								<div class="minicard-number ml-3">10</div>
+								<div class="minicard-text mb-0 mt-0">Citas canceladas</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+					<div class="card blue darken-1 minicard mb-4" >
+						<div class="card-body blue p-0">
+							<div class="minicard-icon d-flex justify-content-center">
+								<div class="circle p-1 blue darken-1">
+									<i class="fas fa-chess-king text-center white-text"></i>
+								</div>
+							</div>
+							<div class="minicard-content pt-3">
+								<div class="minicard-number">60</div>
+								<div class="minicard-text">Citas realizadas</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+					<div class="card amber darken-1 minicard mb-4" >
+						<div class="card-body amber p-0">
+							<div class="minicard-icon d-flex justify-content-center">
+								<div class="circle p-1 amber darken-1">
+									<i class="fas fa-star white-text"></i>
+								</div>
+							</div>
+							<div class="minicard-content pt-3">
+								<div class="minicard-number">4,2</div>
+								<div class="minicard-text">Nota promedio</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-lg-3 col-sm-6 col-sm-6 col-12">
+					<div class="card teal darken-1 minicard" >
+						<div class="card-body teal p-0">
+							<div class="minicard-icon d-flex justify-content-center">
+								<div class="circle p-1 teal darken-1">
+									<i class="fas fa-calendar-check white-text"></i>
+								</div>
+							</div>
+							<div class="minicard-content pt-3">
+								<div class="minicard-number">75</div>
+								<div class="minicard-text">Puntos recientes</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-lg-4 mt-5">
+					<div class="page-subtitle mb-4">Ultimas valoraciones</div>
+				</div> 
+			</div> -->
+			<div class="row mt-5">
+				@yield('contenido')
+			</div>
 		</div>
-		<div class="row mb-0">
-			@yield('contenido')
-		</div>
-    </div>
-    <!--/. Content -->
-	
-    <script type="text/javascript" src="{{asset('dashboard/js/jquery-3.3.1.min.js')}}"></script>
-	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="{{asset('dashboard/js/popper.min.js')}}"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="{{asset('dashboard/js/bootstrap.min.js')}}"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="{{asset('dashboard/js/mdb.js')}}"></script>
-    <script type="text/javascript" src="{{asset('dashboard/js/main.js')}}"></script>
-    <script>
-      // SideNav Initialization
-      $(".button-collapse").sideNav();
-    </script>
-    <script>
-      $('#message').modal('show')
-      $.datepicker.regional['es'] = {
-        closeText: 'Cerrar',
-        prevText: '< Ant',
-        nextText: 'Sig >',
-        currentText: 'Hoy',
-        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-        dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-        dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-        weekHeader: 'Sm',
-        dateFormat: 'dd/mm/yy',
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: ''
-      };
-      $.datepicker.setDefaults($.datepicker.regional['es']);
-      $(function() {
-        $("#datepicker").datepicker({ minDate: 0 });
-      });
-
-      $('.timepicker').timepicker({
-        timeFormat: 'h:mm p',
-        defaultTime: 'now +30',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-      });
-    </script>
-</body>
+		<!--/Content -->
+		
+		
+		
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="{{asset('dashboard/js/popper.min.js')}}"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="{{asset('dashboard/js/bootstrap.min.js')}}"></script>
+		<!-- MDB core JavaScript -->
+		<script type="text/javascript" src="{{asset('dashboard/js/mdb.js')}}"></script>
+		<script type="text/javascript" src="{{asset('dashboard/js/main.js')}}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/lang-all.js"></script>
+	</body>
 </html>

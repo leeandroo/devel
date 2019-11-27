@@ -15,24 +15,25 @@
 Route::get('/', 'InterfazController@get_landing_page');
 Route::get('/login', 'InterfazController@get_login_page');
 Route::get('/register', 'InterfazController@get_register_page');
-Route::post('register', 'Auth\RegisterController@register')->name('register');
+Route::post('/register_new_client', 'Auth\RegisterController@register_new_client')->name('register_client');
+Route::post('/register_new_colaborator', 'Auth\RegisterController@register_new_colaborator')->name('register_colaborator');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // RUTAS PROFILE
 Route::get('/user-profile', 'InterfazController@get_user_profile');
 Route::get('/user-profile/tareas', 'InterfazController@get_tasks');
-Route::post('/solicitar', 'AgendaController@store');
+Route::post('/solicitar-servicio', 'AgendaController@store');
 Route::get('/cancelar/{cita}', 'AgendaController@destroy');
-Route::post('/agendar/{cita}', 'OTController@store');
-Route::get('/details/{cita}', 'OTController@get_details');
+Route::post('/agendar/{id}', 'OTController@store');
+Route::get('/details/{id}', 'OTController@get_details');
 Route::get('/iniciar/{cita}', 'OTController@initialize_job');
 Route::post('/agregar/tareas/{cita}', 'OTController@store_activities');
 Route::post('/agregar/insumos/{cita}', 'OTController@store_supplies');
 Route::get('/eliminar/tareas/{ot}', 'OTController@delete_activities');
 Route::get('/eliminar/insumos/{ot}', 'OTController@delete_supplies');
 Route::post('/finalizar/{cita}', 'OTController@finalize_job');
-Route::get('/descargar/{ot}', 'OTController@download_ot');
+Route::get('/descargar/{id}', 'OTController@download_ot');
 Route::get('/user-profile/mis-citas', 'InterfazController@get_mydate_page');
 Route::get('/user-profile/control-citas', 'InterfazController@get_all_dates');
  

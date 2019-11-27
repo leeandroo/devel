@@ -3,332 +3,70 @@
 @section('title', 'Detalle de cita')
 @section('tareas','active-item')
 @section('contenido')
-<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-    <div class="card mt-4">
-        <!-- <div class="view overlay text-center align-baseline">
-            <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-            <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-            </a>
-        </div> -->
-        <div class="card-body">
-            <div class="container-fluid">
-                @if($ot->count() > 0)
-                    <p class="page-subtitle mb-3 align-baseline mt-2">Información del cliente</p>
-                    @foreach($ot as $info)
-                        <p class="card-text"><i class="fas fa-signature cyan-text fa-fw"></i> <b>Nombre:</b> {{ $info->name.' '.$info->lastname }}</p>
-                        <p class="card-text"><i class="far fa-id-card cyan-text fa-fw"></i> <b>RUT: </b> {{ $info->rut }}</p>
-                        <p class="card-text"><i class="fas fa-map-marker-alt cyan-text fa-fw"></i> <b>Dirección: </b> {{ $info->direccion }}</p>
-                        <p class="card-text"><i class="fas fa-user-tie cyan-text fa-fw"></i> <b>Tipo de cliente: </b> {{$info->tipo_cliente }}</p>
-                    @endforeach
-                    <p class="page-subtitle mb-3 align-baseline">Información de contacto</p>
-                    @foreach($ot as $contacto)
-                        <p class="card-text"><i class="fas fa-envelope cyan-text fa-fw"></i> <b>Correo: </b> {{$contacto->email }}</p>
-                        <p class="card-text"><i class="fas fa-mobile-alt cyan-text fa-fw"></i> <b>Telefono: </b>{{ $contacto->telefono }}</p>
-                        @if($contacto->estado_whatsapp == 1)
-                            <p class="card-text mb-4"><i class="fab fa-whatsapp cyan-text fa-fw"></i> <b>Whastapp habilitado: </b>SI</p>
-                        @else
-                            <p class="card-text mb-4"><i class="fab fa-whatsapp cyan-text fa-fw"></i> <b>Whastapp habilitado: </b>No</p>
-                        @endif
-                    @endforeach
-                @else
-                    <blockquote class="blockquote bq-info">
-                        <p class="bq-title">No hemos encontrado registros</p>
-                        <p>z
-                            Los registros del sistema no lograron encontrar nuevas solicitudes.
-                        </p>
-                    </blockquote>
-                @endif
+<div class="col-lg-4 mb-3">
+    <div class="card info-card z-depth-0 p-2 pl-3 pr-3 mb-3">
+        <span class="badge grey lighten-4 ml-3 mt-3 float-left z-depth-0">{{ $cita->user->type }}</span>
+        <div class="card-header mb-0 border-0 white d-flex justify-content-center">
+
+            @if($cita->user->imagen == null)
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="circle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            @else
+                <div class="avatar d-flex justify-content-center">
+                    <img src="{{asset('dashboard/img/avatars/'.$cita->user->imagen)}}" alt="avatar mx-auto white" class="img-fluid rounded-circle z-depth-0">
+                </div>
+            @endif
+            
+        </div>
+        <div class="mt-3 mb-3 text-center">
+            <h4 class="title-card">{{ $cita->user->name.' '.$cita->user->lastname }}</h4>
+            <p class="subtitle-card mb-2">{{ $cita->user->calle.', '.$cita->user->numero_calle }}</p>
+            @if($cita->estado_whatsapp == 1)
+                <p class="text-green generic-text">
+                    <i class="fas fa-circle align-middle mr-1 conect-point"></i> WhatsApp disponible
+                </p>
+            @else
+                <p class="text-red generic-text">WhatsApp inhabilitado</p>
+            @endif
+        </div>
+        <div class="card-footer white border-0 mt-0">
+            <div id="btn-date">
+                <a type="button" class="btn btn-block info-color white-text z-depth-0" href="{{ url('/descargar/'.$cita->id) }}">
+                    Descargar OT <i class="fas fa-download ml-2 fa-fw"></i>
+                </a>
             </div>
         </div>
     </div>
 </div>
-<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 p-0">
-    <div class="col-lg-12">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="">
-                    @if($ot->count() > 0)
-                        <p class="page-subtitle align-baseline">Descripción del servicio:</p>
-                        @foreach($ot as $cita)
-                            <h5 class="grey-text mb-0">
-                                {{ $cita->descripcion }}
-                                <a href="{{ url("/descargar/{$cita->idorden_trabajo}") }}" class="btn btn-sm btn-rounded cyan white-text m-0 float-right">Descargar OT</a>
-                            </h5>
-                        @endforeach
-                    @else
-                        <blockquote class="blockquote bq-info">
-                            <p class="bq-title">No hemos encontrado registros</p>
-                            <p>z
-                                Los registros del sistema no lograron encontrar nuevas solicitudes.
-                            </p>
-                        </blockquote>
-                    @endif
-                </div>
-            </div>
+<div class="col-lg-8">
+    <ul class="nav nav-tabs border-0" id="custom-profile-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="true">Información</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+            aria-selected="false">Detalle de atención</a>
+        </li>
+    </ul>
+    <div class="tab-content pl-0 pr-0" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <h1 class="title-card mt-2 mb-4">Servicio</h1>
+            
         </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="">
-                    @if($ot->count() > 0)
-                        <p class="page-subtitle align-baseline mb-1">Detalles del servicio</p>
-                        <table class="table table-responsive-sm ">
-                            <thead>
-                                <tr>
-                                    <th class="table-title">Servicio</th>
-                                    <th class="table-title">Fecha</th>
-                                    <th class="table-title">Hora</th>
-                                    <th class="table-title">Precio</th>
-                                    <th class="table-title">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($ot as $ot)
-                                    <tr>
-                                        <td class="table-text align-baseline">{{ $ot->servicio }}</td>
-                                        <td class="table-text align-baseline">{{ $ot->fecha }}</td>
-                                        <td class="table-text align-baseline">{{ $ot->hora_inicio.' hrs' }}</td>
-                                        <td class="table-text align-baseline">{{ '$'.$ot->precio }}</td>
-                                        <td class="table-text align-baseline">{{ $ot->estado }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" class="table-text align-baseline text-right">
-                                            <a href="{{ url("/iniciar/{$ot->idorden_trabajo}") }}" class="btn btn-sm btn-rounded success-color white-text m-0">Inciar trabajo</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <blockquote class="blockquote bq-info">
-                            <p class="bq-title">No hemos encontrado registros</p>
-                            <p>z
-                                Los registros del sistema no lograron encontrar nuevas solicitudes.
-                            </p>
-                        </blockquote>
-                    @endif
-                </div>
-            </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie
+            locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
+            blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+            Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+            PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
+            salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
+            sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
         </div>
     </div>
 </div>
 
-@if($ot->estado == "En proceso")
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="">
-                    <p class="page-subtitle mb-3 align-baseline mt-2">Agregar tareas anexas</p>
-                    <form class="align-items-center" style="color: #757575;" action="{{ url("/agregar/tareas/{$ot->idorden_trabajo}") }}" method="POST" class="needs-validation">
-                        {!! csrf_field() !!}
-                        <input type="hidden" class="form-control" name="idorden" value="{{ $ot->idorden_trabajo }}">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="tarea" class="mt-1 mb-3 box-label">Tarea</label>
-                                    <input type="text" class="form-control" name="tarea">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3">
-                                    <label for="descripcion">Descripción</label>
-                                    <textarea name="descripcion" class="form-control rounded-0" type="text" rows="4"></textarea>
-                                </div>	
-                            </div>
-                        </div>
-                        <div class="md-for m-0 text-right" id="btnformulario">
-                            <button type="submit" class="btn btn-sm btn-rounded cyan white-text" id="btn-aceptar">Agregar <i class="fa fa-paper-plane ml-2"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="container-fluid">
-                    <p class="page-subtitle mb-3 align-baseline mt-2">Tareas agregadas</p>
-                    @if($tareas->count() > 0)
-                    <table class="table table-responsive-sm ">
-                        <thead>
-                            <tr>
-                                <th class="table-title">Tarea</th>
-                                <th class="table-title">Descripción</th>
-                                <th class="table-title">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($tareas as $tarea)
-                                <tr>
-                                    <td class="table-text align-baseline">{{ $tarea->nombre }}</td>
-                                    <td class="table-text align-baseline">{{ $tarea->descripcion }}</td>
-                                    <td colspan="5" class="table-text align-baseline text-right">
-                                        <a href="{{ url("/eliminar/tareas/{$ot->idorden_trabajo}") }}" class="btn btn-sm danger-color white-text">Eliminar</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @else
-                        <blockquote class="blockquote bq-warning">
-                            <p class="bq-title">No se han agregado tareas</p>
-                            <p>
-                                Despues de realizar su solicitud estas quedan pendientes de su confirmación y que se les asigne personal, fechas y horarios.
-                            </p>
-                        </blockquote>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="">
-                    <p class="page-subtitle mb-3 align-baseline mt-2">Agregar insumos</p>
-                    <form class="align-items-center" style="color: #757575;" action="{{ url("/agregar/insumos/{$ot->idorden_trabajo}") }}" method="POST" class="needs-validation">
-                        {!! csrf_field() !!}
-                        <input type="hidden" class="form-control" name="idorden" value="{{ $ot->idorden_trabajo }}">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="nombre" class="mt-1 mb-3 box-label">Insumos</label>
-                                    <select class="custom-select" name="insumo">
-                                        @foreach($insumos as $insumo)
-                                        <option value="{{ $insumo->idinsumo }}">{{ $insumo->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="hora_inicio" class="mt-2 mb-3 box-label">Cantidad</label>
-                                    <input type="number" class="form-control" name="cantidad">
-                                </div>	
-                            </div>
-                        </div>
-                        <div class="md-for m-0 text-right" id="btnformulario">
-                            <button type="submit" class="btn btn-sm btn-rounded cyan white-text" id="btn-aceptar">Agregar <i class="fa fa-paper-plane ml-2"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="container-fluid">
-                    <p class="page-subtitle mb-3 align-baseline mt-2">Insumos utilizados</p>
-                    @if($insumos_agregados->count() > 0)
-                    <table class="table table-responsive-sm ">
-                        <thead>
-                            <tr>
-                                <th class="table-title">Insumo</th>
-                                <th class="table-title">Cantidad</th>
-                                <th class="table-title">Precio </th>
-                                <th class="table-title">Costo final </th>
-                                <th class="table-title">Opciones </th>
-                                <th></th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($insumos_agregados as $insumo)
-                                <tr>
-                                    <td class="table-text align-baseline">{{ $insumo->nombre }}</td>
-                                    <td class="table-text align-baseline">{{ $insumo->cantidad }}</td>
-                                    <td class="table-text align-baseline">{{ $insumo->precio}}</td>
-                                    <td class="table-text align-baseline">{{ $insumo->precio*$insumo->cantidad}}</td>
-                                    <td colspan="5" class="table-text align-baseline">
-                                        <a href="{{ url("/eliminar/insumos/{$ot->idorden_trabajo}") }}" class="btn btn-sm danger-color white-text">Eliminar</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @else
-                        <blockquote class="blockquote bq-warning">
-                            <p class="bq-title">No se han agregado insumos</p>
-                            <p>
-                                Despues de realizar su solicitud estas quedan pendientes de su confirmación y que se les asigne personal, fechas y horarios.
-                            </p>
-                        </blockquote>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-3">
-        <div class="card mt-4">
-            <!-- <div class="view overlay text-center align-baseline">
-                <i class="fas fa-user-circle cyan-text mr-1 fa-6x m-4"></i>
-                <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <div class="card-body">
-                <div class="container-fluid">
-                    <p class="page-subtitle mb-3 align-baseline mt-2">Finalizar proceso</p>
-                    <form class="align-items-center" style="color: #757575;" action="{{ url("/finalizar/{$ot->idorden_trabajo}") }}" method="POST" class="needs-validation">
-                        {!! csrf_field() !!}
-                        <input type="hidden" class="form-control" name="idorden" value="{{ $ot->idorden_trabajo }}">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="observacion" class="mt-1 mb-3 box-label">Observación</label>
-                                    <textarea name="observacion" rows="5" class="form-control"></textarea>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="md-for m-0 text-right" id="btnformulario">
-                            <button type="submit" class="btn btn-sm btn-rounded cyan white-text" id="btn-aceptar">Finalizar trabajo <i class="fa fa-paper-plane ml-2"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-@endif
 @endsection

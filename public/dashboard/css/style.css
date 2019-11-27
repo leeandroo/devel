@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:200,600|PT+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:200,600|PT+Sans&display=swap');
 
 
 .breadcrumb-dn {
@@ -52,10 +52,7 @@
 	text-align: center;
 }
 
-.avatar img{
-	width: 68px;
-	height: 65px;
-}
+
 
 .user-profile{
 	width: 100%;
@@ -146,4 +143,741 @@ a.list-item:hover{
 	font-family: "PT Sans", sans-serif;
 	font-size: 15px;
 	color: grey;
+} */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+
+.circle,
+.new-date-button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.new-date-button button {
+	font-family: 'PT Sans';
+	text-transform: none;
+	color: #0288d1;
+	background-color: transparent;
+}
+
+
+.user-new-date {
+	width: 100%;
+	height: 100%;
+}
+
+.new-date-button {
+	width: 100%;
+	height: 100%;
+}
+.icon-date {
+	color: #69F0AE;
+}
+
+.circle {
+	width: 150px;
+	height: 150px;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	background-color: #fafafa;
+	color: #9e9e9e;
+	font-size: 80px;
+	border: 1px solid #bdbdbd;
+}
+
+.modal-title {
+	font-family: 'Raleway';
+	font-size: 30px;
+	color: #000;
+}
+
+.close {
+	font-size: 35px;
+	font-weight: normal;
+	color: #9e9e9e;
+}
+
+.new-date-body {
+	width: 100%;
+	height: 50%;
+	color: #757575
+}
+
+#modal-form label {
+	font-size: 17px;
+	font-family: 'Raleway';
+	color: #9e9e9e;
+}
+
+#btn-modal button {
+	font-family: 'Open Sans';
+	text-transform: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+#modal-form textarea,
+#modal-form input,
+#modal-form select {
+	height: 50px;
+	font-family: 'Nunito';
+	font-size: 17px;
+	color: #000000;
+}
+
+#modal-form textarea:focus,
+#modal-form select:focus {
+	border-color: #e0e0e0;
+  	-webkit-box-shadow: none;
+  	box-shadow: none;
+}
+
+.date-title {
+	width: 100%;
+	height: 40%;
+	color: #424242;
+	font-size: 20px !important;
+	font-family: 'Montserrat';
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.date-text {
+	width: 100%;
+	height: 60%;
+	padding-left: 35px; 
+	padding-right: 35px;
+	text-align: center;
+}
+
+.new-date-button button {
+	font-size: 17px;
+	font-family: 'Nunito';
+	text-transform: none;
+}
+
+#btn-logout {
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+}
+
+#btn-edit button{
+	text-transform: none;
+	font-size: 14px;
+	font-family: 'Nunito';
+	height: 42px;
+	border-radius: 5px;
+}
+#btn-logout button {
+	text-transform: none;
+	font-size: 17px;
+	font-family: 'Nunito';
+	width: 80%;
+	height: 52px;
+	padding: 10px;
+	color: #4285F4;
+}
+
+#custom-nav-dashboard {
+	height: 75px;
+	background-color: #f5f5f5 !important;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+
+.avatar img{
+	width: 190px;
+	height: 190px;
+	box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile .user-name {
+	font-size: 22px;
+	font-family: 'Montserrat', sans-serif;
+	color: #000000;
+}
+
+.user-profile .user-email {
+	font-size: 17px !important;
+	font-family: 'Nunito', sans-serif;
+	color: #9e9e9e;
+}
+
+.profile-icon {
+	color: #0288D1;
+	font-size: 22px;
+}
+
+.minicard-number {
+	font-family: "Open Sans";
+	font-size: 40px;
+	color: #039be5;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+	border-right: 1px solid #e0e0e0;
+	display: inline-block;
+}
+
+.minicard-icon {
+	font-size: 20px;
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+.minicard-content{ 
+	width: 100%;
+	height: 100%;
+}
+
+.rotate-btn {
+	width: 200px;
+	height: 60px;
+	background: #FFFFFF;
+	border: 1px solid #0288D1;
+	color: #0288D1;
+	font-family: 'Nunito';
+	border-radius: 30px;
+	padding: 10px;
+}
+
+.text-red {
+	color: #f50057;
+}
+
+.text-amber {
+	color: #ffab00;
+}
+
+.text-blue {
+	color: #0091ea;
+}
+
+.text-green {
+	color: #00e676;
+}
+
+.generic-text {
+	font-family: 'PT Sans';
+	font-size: 14px;
+}
+
+.conect-point {
+	font-size: 5px !important;
+}
+
+.title-card { 
+	font-family: "Raleway";
+	font-size: 22px;
+	font-weight: bold !important;
+	color: #000000;
+}
+
+.change-title {
+	font-size: 21px;
+	color: #757575;
+	font-family: "Nunito";
+	font-weight: bold;
+	background-color: transparent;
+}
+
+.title-card-primary { 
+	font-family: "Montserrat";
+	font-weight: bold;
+	font-size: 18px;
+	color: #212121;
+}
+
+.list-title {
+	font-family: "Nunito";
+	font-size: 15px;
+	color: #000000;
+}
+
+.list-text {
+	font-family: "Nunito";
+	font-size: 15px;
+	color: #9e9e9e;
+	margin-left: 39px;
+}
+
+.info-list li {
+	list-style: none;
+	color: #212121;
+	font-family: "Nunito";
+}
+
+.info-list {
+	padding: 0px;
+}
+
+.background {
+    background: #fafafa;
+	border-radius: 0 0 150px 25px;
+	height: 235px;
+	margin-right: 240px;
+}
+
+
+.button-collapse {
+	color:transparent;
+	font-size: 19px;
+}
+
+.nav-title {
+	margin-left: 275px;
+	font-size: 25px;
+	font-family: "Montserrat";
+	color: #212121;
+	text-align: left;
+}
+
+.nav {
+	margin-right: 30px;
+}
+
+.main {
+	padding-top: 62px;
+	padding-left: 240px;
+}
+
+
+.row {
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-bottom: 10px;
+}
+
+.card {
+	height: auto;
+	box-sizing: border-box;
+	box-shadow: 12px 24px 25px rgba(0, 0, 0, 0.15);	
+}
+
+.text-card {
+	font-size: 15px;
+	color: #9e9e9e;
+	font-family: 'Nunito';
+}
+
+.minicard {
+	height: 110px !important;
+	text-align: center;
+}
+
+.minicard-text {
+	font-family: "PT Sans";
+	color: #9e9e9e;
+	font-size: 20px;
+	text-align: center;
+	width: 50%;
+	float: right;
+	height: 100%;
+}
+
+.acent-border {
+	border-left: 4px solid #00e676 !important;
+}
+
+
+.info-card-default,
+.info-card {
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+	border: 1px solid #e0e0e0;
+}
+
+
+.info-card-default {
+	height: 100% !important;
+	background-color: #fafafa;
+	border: 2px dashed #e0e0e0;
+}
+
+
+#settings {
+	color: transparent;
+}
+
+@media only screen and (max-width : 1100px) {
+	.breadcrumb-dn, .main {
+		margin-left: 0;
+	}
+
+	#custom-nav {
+		width: 100%;
+	}
+
+	.nav {
+		margin-right: 0;
+	}
+
+	.row {
+		margin-left: 20px;
+		margin-right: 20px;
+		padding: 0;
+	}
+
+	.main {
+		padding-left: 0;
+	}
+
+
+	#wrapper {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	.background{
+		margin-right: 0px;
+		height: 250px;
+	}
+
+	.button-collapse {
+		color: #bdbdbd;
+	}
+
+	.info-card {
+		margin-right: 0px;
+	}
+
+	
+	.acount-details {
+		width: 100%;
+		height: auto;
+	}
+
+
+	.minicard-icon {
+		font-size: 20px;
+	}
+
+	.menu {
+		width: 25%;
+		float: left;
+		font-size: 20px;
+	}
+
+	.nav-title {
+		margin-left: 0px; 
+		float: left;
+		width: 50%;
+		font-size: 20px;
+		text-align: center;
+	}
+
+	#settings{
+		color: #757575;
+		font-size: 20px;
+	}
+
+	.menu a {
+		color: #757575;
+	}
+
+	.nav-content {
+		width: 100%;
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-top: 0px;
+	}
+
+	#custom-nav-dashboard {
+		padding-top: 25px;
+		padding-bottom: 50px;
+	}
+}
+
+.user-level, 
+.user-point {
+	text-align: center;
+	width: 50%;
+	height: 35px;
+	font-family: "PT Sans";
+	font-size: 16px;
+	color: #757575;
+	float: left;
+}
+
+.user-level {
+	border: none;
+	border-right: 2px solid #e0e0e0;
+}
+
+
+.plate-text {
+	font-family: "Nunito";
+	font-size: 20px;
+	color: #616161;
+}
+
+.point-text {
+	font-family: "Nunito";
+	font-size: 20px;
+	color: #00E676;
+}
+
+.user-profile .user-type {
+	font-size: 14px;
+	font-family: 'PT Sans', sans-serif;
+	font-weight: normal;
+}
+
+.list-item {
+	font-family: "Nunito", sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	color: #bdbdbd;
+	font-weight: 600;
+	margin: 0px;
+}
+
+a.list-item:hover{
+	color: black;
+}
+
+.list-mark {
+	width: 5px;
+	height: 100%;
+	float: left;
+
+}
+
+.icono {
+	color: #bdbdbd;
+}
+
+.info-list .icono {
+	color: #212121;
+}
+
+.active-item {
+	color: #000000;
+	
+}
+
+.active-item .list-mark {
+	background-color: #0288D1;
+}
+
+.active-item .icono {
+	color: #0288D1;
+}
+
+.new-date {
+	width: 100%;
+	height: auto;
+}
+
+.dropdown-menu {
+	font-family: "PT Sans", sans-serif;
+}
+
+.page-title {
+	font-family: "Montserrat", sans-serif;
+	font-weight: bold;
+	font-size: 28px;
+	width: auto;
+}
+
+.page-subtitle {
+	font-family: "Nunito";
+	font-size: 17px;
+	color: #212121;
+	font-weight: bold;
+}
+
+#custom-profile-tab .nav-item {
+	font-family: 'Nunito';
+	font-size: 18px;
+	border: 0px;
+	width: auto;
+	margin-right: 15px;
+	text-align: center;
+}
+#custom-tab .nav-item {
+	height: 90px;
+	font-size: 18px;
+	font-family: 'Nunito';
+	text-align: left;
+	width: 50% !important;
+	border-radius: 0px;
+}
+
+.tab-mark {
+	width: 80px;
+	height: 2px;
+	background-color: transparent;
+}
+
+#custom-profile-tab .nav-link,
+#custom-tab .nav-link {
+	text-decoration: none;
+	color: #bdbdbd;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	padding-left: 0px;
+	border: 2px solid transparent;
+	border-bottom: 2px solid transparent;
+}
+
+#custom-profile-tab .active {
+	background-color: transparent;
+	color: #212121;
+	border: 2px solid transparent;
+	border-bottom: 2px solid #0288d1;
+}
+
+#custom-profile-tab .nav-link:hover{
+	border: 2px solid transparent;
+	border-bottom: 2px solid #0288d1;
+}
+
+.active-tab{
+	background-color: transparent !important;
+	color: #212121 !important;
+}
+
+.active-tab .tab-mark {
+	background-color: #0277BD !important;
+}
+
+#new-dates {
+	width: 100% !important;
+	height: 480px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.info-card-title {
+	font-family: "Raleway";
+	font-size: 17px !important;
+	font-weight: bold !important;
+	color: #212121;
+}
+
+.info-card-text {
+	font-size: 16px;
+	font-family: 'PT Sans', sans-serif;
+	color: #9e9e9e;
+}
+
+#new-dates::-webkit-scrollbar {
+	width: 0px;
+	padding: 0px;
+    background-color: #F5F5F5;
+} 
+
+#btn-cancelar button {
+	color: #ff4444;
+	text-transform: none;
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.delete-button-alt {
+	text-decoration: none;
+	color: #e0e0e0;
+	font-size: 17px;
+}
+
+.delete-button-alt:hover {
+	color: #ff8a80;
+}
+
+.card-footer-text {
+	font-family: 'Montserrat';
+	font-size: 15px;
+	color: #69F0AE;
+}
+
+.icon-wsp {
+	font-size: 22px;
+	color: #9e9e9e;
+}
+
+.card-header img {
+	width: 150px !important;
+	height: 150px !important;
+}
+
+
+.info-card .badge {
+	font-family: 'Raleway';
+	font-weight: 300 !important;
+	color: #757575 !important;
+	font-size: 16px;
+	width: 90px !important;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px;
+}
+
+.subtitle-card {
+	font-size: 16px;
+	font-family: 'Nunito';
+	color: #757575;
+}
+
+
+#btn-date a {
+	font-size: 15px;
+	font-family: 'Raleway';
+	font-weight: bold;
+	text-transform: none;
+	padding-top: 9px;
+	padding-bottom: 9px;
+}
+
+.worker-list img{
+	width: 45px !important;
+	height: 45px !important;
+}
+
+.worker-list li {
+	list-style: none;
+}
+
+.text-list {
+	font-family: 'Raleway';
+	font-size: 18px;
+	color: #000;
+	width: 100%;
+}
+
+.text-list-mini{
+	font-family: 'PT Sans';
+	font-size: 14px;
+	color: #9e9e9e;
+	width: 100%;
+}
+
+.fc-center h2{
+	text-transform: capitalize;
+}
+
+.fc-event {
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	font-family: 'Nunito';
+	font-size: 16px !important;
+	height: auto;
+	margin-bottom: 10px !important;
+}
+
+.fc-title {
+	font-size: 14px;
 }

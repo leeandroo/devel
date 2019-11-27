@@ -4,144 +4,154 @@
 @section('citas', 'active-item')
 @section('contenido')
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card mt-4">
-        <div class="card-body">
-            <div class="container-fluid">
-                <p class="page-subtitle mb-4 text-center">Nuevas solicitudes</p>
-    
-                @if($citas_agendadas->count() > 0)
-                    @foreach($citas_nuevas as $cita)
-                        <div class="card mb-3">
-                            <div class="card-body p-0">
-                                <div class="card-header grey lighten-5">
-                                    <div class="row">
-                                        <div class="col-12 col-xs-12 text-center">
-                                            <p class="page-subtitle black-text mb-0 mt-2">
-                                                <b>Número de solicitud:</b>
-                                                <span class="black-text">{{ $cita->idcita }}</span>
-                                            </p>
-                                        </div>
+    <ul class="nav nav-tabs border-0" id="custom-profile-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#nuevas" role="tab" aria-controls="home"
+            aria-selected="true"> 
+                Recientes 
+                <span class="badge badge-primary z-depth-0 ml-2">
+                    {{  $citas->where('estado_cita', 'Nueva')->count()  }}
+                </span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+            aria-selected="false"> 
+                Agendadas 
+                <span class="badge badge-warning z-depth-0 ml-2">
+                    {{  $citas->where('estado_cita', 'Agendada')->count()  }}
+                </span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content pl-0 pr-0" id="myTabContent">
+        <div class="tab-pane fade show active" id="nuevas" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row p-0 m-0">
+                @foreach($citas as $cita)
+                    @if($cita->estado_cita == 'Nueva')
+                    <div class="col-lg-4 mb-4 pl-0 pr-0 pr-lg-4 pr-lg-4">
+                        <div class="card info-card z-depth-0 p-2 pl-3 pr-3">
+                            <span class="badge grey lighten-4 ml-3 mt-3 float-left z-depth-0">Nueva</span>
+                            <div class="card-header mb-0 border-0 white d-flex justify-content-center">
+                
+                                @if($cita->user->imagen == null)
+                                    <div class="circle">
+                                        <i class="fas fa-user"></i>
                                     </div>
-                                </div>
-                                <div class="row ml-0 mr-0 mt-4">
-                                    <div class="col-6 col-lg-3 text-center mb-3">
-                                        <div>
-                                            <i class="fas fa-toolbox fa-2x yellow-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Servicio </b> <br>
-                                            <span class="grey-text">{{ $cita->servicio }}</span>
+                                @else
+                                    <div class="avatar">
+                                        <img src="{{asset('dashboard/img/avatars/'.$cita->user->imagen)}}" alt="avatar mx-auto white" class="img-fluid rounded-circle z-depth-0">
+                                    </div>
+                                @endif
+                                
+                            </div>
+                            <div class="mt-3 text-center">
+                                <h4 class="title-card">{{ $cita->user->name.' '.$cita->user->lastname }}</h4>
+                                <p class="subtitle-card mb-2">{{ $cita->user->calle.', '.$cita->user->numero_calle }}</p>
+                                @if($cita->estado_whatsapp == 1)
+                                    <p class="text-green generic-text">
+                                       <i class="fas fa-circle align-middle mr-1 conect-point"></i> WhatsApp habilitado
+                                    </p>
+                                @else
+                                    <p class="text-red generic-text">WhatsApp desactivado</p>
+                                @endif
+                            </div>
+                    
+                            <div class="card-body">
+                                <div class="info-card-body">
+                                    <div class="mb-4">
+                                        <h1 class="info-card-title mb-2 text-left">Servicio</h1>
+                                        <p class="info-card-text">
+                                            {{ $cita->servicio->nombre }} <br>
+                                            <i class="far fa-bookmark mr-2 fa-fw"></i>{{$cita->servicio->tipo }}
                                         </p>
                                     </div>
-                                    <div class="col-6 col-lg-3 text-center mb-3">
-                                        <div>
-                                            <i class="fas fa-user-alt fa-2x blue-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Cliente</b> <br>
-                                            <span class="grey-text">{{ $cita->name.' '.$cita->lastname }}</span>
+                                    <div class="">
+                                        <h1 class="info-card-title mb-2 text-left">Observación</h1>
+                                        <p class="info-card-text mb-0">
+                                            {{ $cita->descripcion }}
                                         </p>
                                     </div>
-                                    <div class="col-6 col-lg-3 text-center">
-                                        <div>
-                                            <i class="fas fa-file-contract fa-2x green-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Descripción</b> <br>
-                                            @if($cita->descripcion == NULL)
-                                            <span class="grey-text">Sin descripción</span>
-                                            @else
-                                            <span class="grey-text">{{ $cita->descripcion }}</span>
-                                            @endif
-                                        </p>
-                                    </div>
-                                    <div class="col-6 col-lg-3 text-center">
-                                        <div>
-                                            <i class="fas fa-map fa-2x red-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Lugar de atención</b> <br>
-                                            <span class="grey-text">{{ $cita->direccion }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card-footer white border-0">
-                                    <div class="row">
-                                        <div class="col-12 col-xs-12 text-center p-0">
-                                            <button type="button" class="btn btn-sm btn-round cyan btn-rounded waves-effect m-0" data-target="#modal-{{$cita->idcita}}" data-toggle="modal">Agendar cita</button>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                             </div>
+                            <div class="card-footer white border-0 mt-0">
+                                <div id="btn-date">
+                                    <a type="button" class="btn btn-block blue accent-3 white-text z-depth-0" data-toggle="modal" data-target="#modal-{{$cita->id}}">
+                                        Agendar cita <i class="fas fa-check ml-2 fa-fw"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            @include('pages.agenda.schedule')
                         </div>
-                        @include('pages.agenda.schedule')
-                    @endforeach
-                @else
-                    <blockquote class="blockquote bq-warning">
-                        <p class="bq-title">No posee citas agendadas</p>
-                        <p>
-                            Despues de realizar su solicitud estas quedan pendientes de su confirmación y que se les asigne personal, fechas y horarios.
-                        </p>
-                    </blockquote>
-                @endif
-                @include('pages.agenda.create')
+                    </div>
+                    @endif
+                @endforeach
             </div>
         </div>
-    </div>
-</div>
-<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 mb-3">
-    <div class="card mt-4">
-        <div class="card-body">
-            <div class="container-fluid">
+        <div class="tab-pane fade pl-0 pr-0" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row p-0 m-0">
+                @foreach($citas as $cita)
+                    @if($cita->estado_cita == 'Agendada')
+                    <div class="col-lg-4 mb-4 pl-0 pr-0 pr-lg-4 pr-lg-4">
+                        <div class="card info-card z-depth-0 p-2 pl-3 pr-3">
+                            <span class="badge grey lighten-4 ml-3 mt-3 float-left z-depth-0">{{ $cita->estado_cita }}</span>
+                    
+                            <div class="card-header mb-0 border-0 white d-flex justify-content-center">
                 
-                @if($citas_agendadas->count() > 0)
-                    <p class="page-subtitle mb-3 text-center">
-                        Solicitudes agendadas
-                    </p>
-
-                    @foreach ($citas_agendadas as $cita)
-                        <div class="card mb-3">
+                                @if($cita->user->imagen == null)
+                                    <div class="circle">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                @else
+                                    <div class="avatar">
+                                        <img src="{{asset('dashboard/img/avatars/'.$cita->user->imagen)}}" alt="avatar mx-auto white" class="img-fluid rounded-circle z-depth-0">
+                                    </div>
+                                @endif
+                                
+                            </div>
+                            <div class="mt-3 text-center">
+                                <h4 class="title-card">{{ $cita->user->name.' '.$cita->user->lastname }}</h4>
+                                <p class="subtitle-card mb-2">{{ $cita->user->calle.', '.$cita->user->numero_calle }}</p>
+                                @if($cita->estado_whatsapp == 1)
+                                    <p class="text-green generic-text">
+                                       <i class="fas fa-circle align-middle mr-1 conect-point"></i> WhatsApp habilitado
+                                    </p>
+                                @else
+                                    <p class="text-red generic-text">WhatsApp desactivado</p>
+                                @endif
+                            </div>
+                    
                             <div class="card-body">
-                                <h6 class="card-title grey-text">
-                                    <b>Detalle de solicitud:</b>
-                                    <i class="fas fa-edit grey-text float-right"></i> 
-                                </h6>
-                                <ul>
-                                    <li>
-                                        <p class="card-text mb-0"><b>Servicio:</b> {{$cita->servicio}}</p>
-                                    </li>
-                                    <li>
-                                         <p class="card-text mb-3"><b>Cliente:</b> {{$cita->nombre_cliente.' '.$cita->apellido_cliente}}</p>
-                                    </li>
-                                </ul>
-                               
-                                <h6 class="card-title grey-text">
-                                    <b>Detalle de atención:</b>
-                                </h6>
-                                <ul>
-                                   <li>
-                                        <p class="card-text mb-0"><b>Fecha:</b> {{$cita->fecha}}</p>
-                                   </li>
-                                   <li>
-                                        <p class="card-text mb-0"><b>Hora:</b> {{$cita->hora_inicio.' hrs'}}</p>
-                                   </li>
-                                   <li>
-                                        <p class="card-text mb-0"><b>Responsable:</b> {{$cita->nombre_empleado.' '.$cita->apellido_empleado}}</p>
-                                   </li>
-                                </ul>
+                                <div class="info-card-body">
+                                    <div class="mb-4">
+                                        <h1 class="info-card-title mb-2 text-left">Servicio</h1>
+                                        <p class="info-card-text">
+                                            {{ $cita->servicio->nombre }} <br>
+                                            {{$cita->servicio->tipo }}
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <h1 class="info-card-title mb-2 text-left">Observación</h1>
+                                        <p class="info-card-text mb-0">
+                                            {{ $cita->descripcion }}
+                                        </p>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="card-footer white border-0 mt-0">
+                                <div id="btn-date">
+                                    <a type="button" class="btn btn-block warning-color white-text z-depth-0" data-toggle="modal" data-target="#modal-{{$cita->id}}">
+                                        Editar responsable <i class="fas fa-edit ml-2 fa-fw"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    @endforeach
-                    
-                    <div colspan="5">{{ $citas_nuevas->links('vendor.pagination.bootstrap-4') }}</div>
-                @else
-                    <blockquote class="blockquote bq-warning">
-                        <p class="bq-title">No tiene nuevas solicitudes</p>
-                        <p>
-                            Una vez realice una nueva solicitud estas aparaceran aquí.
-                        </p>
-                    </blockquote>
-                @endif
+                    </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>

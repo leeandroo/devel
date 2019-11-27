@@ -7,67 +7,34 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use Auth;
 use App\OrdenTrabajo;
-use App\Cita;
-use App\Tarea;
+use App\ServicioUser;
 use App\Tiene;
 use App\Insumo;
+use App\Servicio;
+use App\User;
 use PDF;
 
 class OTController extends Controller
 {
-    public function store(Cita $cita, Request $request)
+    public function store($id, Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'hora_inicio' => 'required',
-            'fecha' => 'required',
-            'responsable' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $orden = OrdenTrabajo::create([
-            'idcita' => $cita->idcita,
-            'idempleado'=> $request->get('responsable'),
-            'hora_inicio' => $request->get('hora_inicio'),
-            'fecha'=> $request->get('fecha'),
-            'precio' => 20000,
-            'estado' => 'Pendiente'
-        ]);
-
+        $cita = ServicioUser::find($id);
+        $cita->fecha = $request->get('fecha');
+        $cita->hora_inicio = $request->get('hora_inicio');
+        $hora_termino = new \DateTime($cita->hora_inicio);
+        $cita->hora_termino = $hora_termino->modify('+2 hours');
+        $cita->responsable_id = $request->get('responsable');
         $cita->estado_cita = "Agendada";
         $cita->save();
-
         return back()->with('message', array('title' => '¡Solicitud agendada con exito!', 'body'=>'Se ha agendado una nueva cita.'));
     }
 
-    public function get_details(OrdenTrabajo $cita)
+    public function get_details($id)
     {
-        $ot = DB::table('orden_trabajo as ot')
-        ->join('cita as ct', 'ot.idcita','=','ct.idcita')
-        ->join('user as u', 'ct.iduser', '=', 'u.iduser')
-        ->join('detalle_usuario as du', 'du.iduser', '=', 'u.iduser')
-        ->join('user as e', 'ot.idempleado', '=','e.iduser')
-        ->select('ot.*', 'ct.servicio', 'ct.descripcion', 'ct.estado_whatsapp', 'u.name', 'u.lastname', 'u.email', 'u.rut', 'du.direccion', 'du.telefono', 'du.tipo_cliente')
-        ->where('ot.idcita', '=', $cita->idcita)
-        ->get();
-
-        $tareas = DB::table('tarea as t')
-        ->where('t.idorden_trabajo', '=', $cita->idorden_trabajo)
-        ->paginate(4);
-
-        $insumos_agregados = DB::table('tiene as ti')
-        ->join('insumo as in', 'ti.idinsumo', '=', 'ti.idinsumo')
-        ->select('in.*', 'ti.cantidad')
-        ->where('ti.idorden_trabajo', '=', $cita->idorden_trabajo)
-        ->paginate(4);
-
-        $insumos = DB::table('insumo')->get();
-
-        return view('pages.profile.details', compact('ot', 'tareas', 'insumos', 'insumos_agregados'));
+        $cita = ServicioUser::find($id);
+        $cita->user = User::find($cita->user_id);
+        $cita->servicio = Servicio::find($cita->servicio_id);
+        return view('pages.profile.details', compact('cita'));
     }
 
     public function initialize_job(OrdenTrabajo $cita)
@@ -166,18 +133,13 @@ class OTController extends Controller
         return redirect('/worker-profile')->with('message', array('title' => '¡Genial!', 'body'=>'Has terminado tu trabajo.'));
     }
 
-    public function download_ot(OrdenTrabajo $ot)
+    public function download_ot($id)
     {
-        $ot = DB::table('orden_trabajo as ot')
-        ->join('cita as ct', 'ot.idcita','=','ct.idcita')
-        ->join('user as u', 'ct.iduser', '=', 'u.iduser')
-        ->join('detalle_usuario as du', 'du.iduser', '=', 'u.iduser')
-        ->join('user as e', 'ot.idempleado', '=','e.iduser')
-        ->select('ot.*', 'ct.servicio', 'ct.descripcion', 'ct.estado_whatsapp', 'u.name', 'u.lastname', 'u.email', 'u.rut', 'u.type', 'du.direccion', 'du.telefono', 'du.tipo_cliente', 'e.name as nombre_responsable', 'e.lastname as apellido_responsable')
-        ->where('ot.idcita', '=', $ot->idcita)
-        ->get();
-
+        $ot = ServicioUser::find($id);
+        $ot->servicio = Servicio::find($ot->servicio_id);
+        $ot->user = User::find($ot->user_id);
+        
         $pdf = PDF::loadView('components.ot-pdf',['ot' => $ot]);
-        return $pdf->download('ot-pdf.pdf');
+        return $pdf->stream('ot-pdf.pdf');
     }
 }

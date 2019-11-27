@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\DetalleUsuario;
-use App\Cita;
+use App\ServicioUser;
 use App\OrdenTrabajo;
 use Auth;
 
@@ -30,9 +30,9 @@ class AgendaController extends Controller
             $estadowsp = 1;
         }
 
-        $cita = Cita::create([
-            'iduser' => Auth::user()->iduser,
-            'servicio'=> $request->get('servicio'),
+        $cita = ServicioUser::create([
+            'user_id' => Auth::user()->id,
+            'servicio_id'=> $request->get('servicio'),
             'estado_whatsapp' => $estadowsp,
             'estado_cita'=> "Nueva",
             'descripcion' => $request->get('descripcion')

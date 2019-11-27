@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrdenTrabajo extends Model
 {
     protected $table = "orden_trabajo";
-    protected $primaryKey = "idorden_trabajo";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $insumos;
     public $tareas;
@@ -15,8 +15,8 @@ class OrdenTrabajo extends Model
     public $user;
     
     protected $fillable =[
-    	'idcita',
-        'idempleado',
+    	'cita_id',
+        'user_id',
         'hora_inicio',
         'fecha',
         'precio',

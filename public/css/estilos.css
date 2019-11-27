@@ -1,45 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Hind+Vadodara');
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:600');
-@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200');
-@import url('https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-#acceso .enlace i:hover(){
-	color: cyan;
-}
-#form-container {
-	width: 100%;
-	height: 1012px;
-	background-image: url('../img/fondo-b.jpg');
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+
+
+
+html,
+body,
+header,
+#fondo-login {
+  height: 100%;
 }
 
-#option-card {
-	background-image: url('../img/fondo-c.jpg');
-	background-size: cover;
-	height: 100%;
-	padding: 0;
-}
-
-#btn-agendar {
-	background-color: transparent;
-	color: white;
-	font-size: 18px;
-	width: 150px;
-	margin-left: 0%;
-	border-radius: 100px;
-	border-style: solid;
-	border-width: 0.10rem;
-	padding: 0.25rem 0.25rem;
-	text-transform: capitalize;
-	font-family: "Arial", sans-serif;
-}
-
-/*ESTILOS FORMULARIO*/
 html,
 body,
 header,
@@ -64,60 +36,42 @@ height: 700px;
 }
 }
 
-.top-nav-collapse {
-background-color: rgb(27, 27, 27) !important;
+.nav-link:not(.top-nav-collapse){
+	color: #fff !important;
+	font-weight: bold;
 }
 
 .navbar:not(.top-nav-collapse) {
 	background: transparent !important;
 }
 
-@media (max-width: 991px) {
-.navbar:not(.top-nav-collapse) {
-background: rgb(27, 27, 27) !important;
-}
-}
-
-
-#btnformulario .btn {
-	color: white;
-	background-color: #00bcd4 ;
-	border-radius: 1.25rem;
-	padding: 0.25rem 0.25rem;
-	font-size: 0.875rem;
-	line-height: 1.7;
-	text-transform: capitalize;
-	width:105px;
-}
-/**/
-#basicExampleNav {
-	font-size: 12px;
-	font-family: "Hind Vadodara", sans-serif;
+.top-nav-collapse
+{
+	background: white !important;
+	opacity: 0.97;
 }
 
-#footerfondo .footer{
-	background-color: #4472C4!important; 
+.top-nav-collapse .nav-link {
+	color: #757575 !important;
 }
+
 
 .form-inline .btn {
 	border-style: solid;
 	border-width: thin;
-	padding: 0.25rem 0.25rem;
-	text-transform: capitalize;
-	font-family: "Arial", sans-serif;
+	text-transform: none;
+	width:125px;
 }#btn-sign-up{
 	background-color: transparent;
 	color: white;
-	font-size: 18px;
-	width: 150px;
-	margin-left: 0%;
-	border-radius: 100px;
 }#btn-sign-in{
-	background-color: #4472C4;
-	color: white;
-	border-color: #4472C4;
-	width: 120px;
-	border-radius: 100px;
+	background-color: white;
+	color: #0277bd;
+	border-color: #0277bd;
+	font-family: "Nunito";
+	font-size: 16px;
+	padding: 5px;
+	border-radius: 5px;
 }
 
 #btnForm .btn {
@@ -127,25 +81,7 @@ background: rgb(27, 27, 27) !important;
 
 .top-nav-collapse
 {
-	background: black!important;
-}
-
-#centrar{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-#fondo{
-	background: url('../img/fondo-b.jpg');
-	/*background: url('https://www.2celettronic.com/wp-content/uploads/2016/08/wire-1098059_1920-1.jpg');*/
-	background-repeat: no-repeat;
-	background-size: cover;
-	width: 100%;
-	height: 100%;
-}
-html {
-	scroll-behavior: smooth;
+	background: white !important;
 }
 
 #equipo .card-title {
@@ -177,10 +113,6 @@ html {
 	font-size: 18px;
 }
 
-#fondo .container-fluid .mask {
-	height: 750px;
-	position: absolute;
-}
 
 .title {
 	font-family: "Baloo Thambi";
@@ -195,11 +127,6 @@ html {
 	color: black;
 }
 
-.ra{
-	border-width: 0.30rem;
-	width: 80px;
-	color: #424242;	
-}
 
 #servicios img {
 	height: 350px;
@@ -236,7 +163,7 @@ html,
 body,
 header,
 .view {
-height: 1100px;
+height: 100%;
 }
 }
 @media (min-width: 800px) and (max-width: 850px) {
@@ -244,103 +171,9 @@ html,
 body,
 header,
 .view {
-height: 700px;
+height: 100%;
 }
 }
-
-.top-nav-collapse {
-background-color: rgb(27, 27, 27) !important;
-}
-
-.navbar:not(.top-nav-collapse) {
-background: transparent !important;
-}
-
-@media (max-width: 991px) {
-.navbar:not(.top-nav-collapse) {
-background: rgb(27, 27, 27) !important;
-}
-}
-
-#fondo{
-	background-image: url('https://www.radiopax.com/wp-content/uploads/2019/05/electrifica%C3%A7%C3%A3o.jpg'); 
-	background-repeat: no-repeat; 
-	background-size: cover; 
-	background-position: center center;
-}
-
-#fondoFormulario{
-	background-image: url('../img/ImgFromulario2.jpg'); 
-	background-repeat: no-repeat; 
-	background-size: cover; 
-	background-position: center center;
-}
-
-#centrar{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-
-
-#btnformulario .btn {
-	color: white;
-	background-color: #FE4568;
-	border-radius: 1.25rem;
-	padding: 0.25rem 0.25rem;
-	font-size: 0.875rem;
-	line-height: 2;
-	text-transform: capitalize;
-	width:105px;
-}
-
-#btnLogin .btn {
-	
-	background-color:#FE4568;		
-	border-radius:30px;	
-	color:#ffffff;
-	text-transform: capitalize;
-	padding:10px 31px;
-	/* text-shadow:0px 1px 0px #2f6627; */
-
-}
-
-
-#btnAtras .btn {
-	
-	background-color:transparent;		
-	border-radius:30px;
-	border: 1.5px solid #000000;
-	color:#000000;
-	text-transform: capitalize;
-	padding:10px 31px;
-	/* text-shadow:0px 1px 0px #2f6627; */
-
-}
-
-
-#btnRegistrar .btn {
-	background-color:transparent;		
-	border-radius:30px;
-	border: 1.5px solid #ffffff;
-	color:#ffffff;
-	text-transform: capitalize;
-	padding:10px 31px;
-	
-	/* text-shadow:0px 1px 0px #2f6627; */
-}
-/* fomulario */
-.panel{ 
-	
-	background: white; 
-	border-radius: 3px; 
-	box-shadow: 0px 25px 42px rgba(0,0,0,0.2);
-	 
-}
-/* fomulario */
-
-/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 #btnSesion .btn {
 	color: #203864;
@@ -353,35 +186,9 @@ background: rgb(27, 27, 27) !important;
 	width:130px;
 }
 
-
-
 #btnForm .btn {
 	background-color:  rgb(68, 115, 196);
 	border-radius: 2.5rem;
-}
-
-
-
-html {
-	scroll-behavior: smooth;
-}
-
-.div.col{
-	height: 10vh !important;
-}
-
-#fondo{
-	background-image: url('https://www.radiopax.com/wp-content/uploads/2019/05/electrifica%C3%A7%C3%A3o.jpg'); 
-	background-repeat: no-repeat; 
-	background-size: cover; 
-	background-position: center center;
-}
-
-#fondoFormulario{
-	background-image: url('../img/ImgFromulario2.jpg'); 
-	background-repeat: no-repeat; 
-	background-size: cover; 
-	background-position: center center;
 }
 
 #centrar{
@@ -391,65 +198,328 @@ html {
 }
 
 
+#form-background,
+#background {
+	width: 55%;
+	height: 750px;
+	background-image: url('../img/fondo-b.jpg');
+	background-size: cover;
+	border-radius: 0px 0px 0px 1000px;
+	position: relative;
+	float: right;
+}
 
-#btnformulario .btn {
+#form-background {
+	width: 100%;
+	height: 100%;
+	border-radius: 0px 0px 0px 0px !important;
+	position: fixed;
+}
+
+#form-background .accent-background {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(179.99deg, #01579B 0.03%, rgba(255, 255, 255, 0) 158.03%), #fafafa;
+	border-radius: 0px 0px 0px 0px;
+	opacity: 0.90;
+	position: fixed;
+}
+
+#form-mask {
+	width: 100%;
+	height: 100%;
+}
+
+#form-mask .banner {
+	padding-top: 0px;
+	padding-left: 80px;
+	height: 100%;
+	width: 100%;
+}
+
+#form-background #login-card {
+	height: 530px;
+	width: 570px;
+}
+
+#form-background #register-card {
+	height: 600px;
+	width: 800px;
+	border: 1px solid #bdbdbd;
+}
+
+.banner {
+	width: 100%;
+	height: 750px;
+	padding-top: 250px;
+	padding-left: 200px;
+}
+
+.icon-brand {
+	font-size: 25px;
+	background: linear-gradient(162.68deg, #01579B 19.15%, rgba(255, 255, 255, 0) 88.11%), #00BFA5;
+    -webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	float: left;
+}
+
+.first-name {
+	font-family: "Nunito";
+	color: #bdbdbd;
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+
+.second-name {
+	font-family: "Montserrat";
+	color: #9e9e9e;
+	font-size: 20px;
+}
+
+.name-brand {
+	float: left;
+	margin-left: 10px;
+}
+
+.wrapper {
+	width: 100%;
+	height: 750px;
+}
+
+
+.banner-title {
+	font-family: "Montserrat";
+	color: #757575;
+}
+
+.banner-title h2 {
+	font-size: 35px;	
+}
+
+
+.banner-title h3 {
+	font-size: 48px;
+	font-weight: 800;
+}
+
+.banner-text {
+	font-size: 20px;
+	font-family: "Nunito";
+	color: #9e9e9e;
+}
+
+.banner-mark{
+	border: 3px solid #e0e0e0;
+	width: 80px;
+}
+
+.brand {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.brand .icon-brand {
+	font-size: 40px;
+}
+
+.brand .name-brand {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#register-card .form-title,
+#login-card label {
+	font-size: 18px;
+	font-family: 'Nunito';
+	color: #757575;
+	margin-bottom: 25px;
+	margin-top: 15px;
+}
+
+#register-card .card-body,
+#login-card .card-body {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+#register-card,
+#login-card {
+	box-shadow: 12px 12px 50px rgba(0, 0, 0, 0.1);
+}
+
+#register-card input,
+#login-card input {
+	height: 55px;
+	color: #9e9e9e;
+	font-size: 20px;
+	font-family: 'Nunito';
+	background-color: #fafafa;
+}
+
+#register-card #btn-register,
+#login-card #btn-login {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#btn-register button,
+#btn-login button {
+	text-transform: none;
+	font-size: 20px;
+	border-radius: 5px;
+	font-family: 'Nunito';
+}
+
+.brand .first-name {
+	font-size: 22px;
+}
+
+.brand .second-name {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.welcome {
+	width: 100%;
+	height: auto;
+	padding-top: 15px;
+	margin-bottom: 0px;
+}
+
+.welcome h1 {
+	font-size: 48px;
+	font-family: 'Montserrat';
+	font-weight: bold;
+	color: #fafafa;
+	margin-bottom: 20px;
+}
+
+.welcome p {
+	font-size: 20px;
 	color: white;
-	background-color: #FE4568;
-	border-radius: 1.25rem;
-	padding: 0.25rem 0.25rem;
-	font-size: 0.875rem;
-	line-height: 2;
-	text-transform: capitalize;
-	width:105px;
+	font-family: 'Nunito';
+	font-weight: normal;
+	margin-right: 25px;
+	margin-left: 25px;
 }
 
-#btnLogin .btn {
+@media only screen and (max-width : 1100px) {
+	.navbar:not(.top-nav-collapse) {
+		background: black !important;
+	}
+
+	.top-nav-collapse {
+		background: black !important;
+		opacity: 0.90;
+	}
+
+	.top-nav-collapse .nav-link {
+		opacity: 1 !important;
+	}
+
 	
-	background-color:#FE4568;		
-	border-radius:30px;	
-	color:#ffffff;
-	text-transform: capitalize;
-	padding:10px 31px;
-	/* text-shadow:0px 1px 0px #2f6627; */
+	#background {
+		height: 320px;
+		width: 70%;
+		border-radius: 0px 0px 0px 1000px;
+	}
 
-}
+	#form-mask .banner{
+		padding-top: 0px;
+		padding-left: 25px;
+		text-align: center;
+	}
 
+	#form-mask .banner-mark {
+		margin: auto;
+	}
 
-#btnAtras .btn {
+	#register-card,
+	#login-card {
+		width: 100% !important;
+		height: 100% !important;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	#register-card .card-body,
+	#login-card .card-body{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	#btn-login {
+		height: 90px !important;
+	}
+
+	.banner {
+		padding-left: 25px;
+		padding-right: 18px;
+		padding-top: 350px;
+	}
+
+	.banner h2 {
+		font-size: 25px;
+	}
+
+	.banner h3 {
+		font-size: 45px;
+	}
+
+	.navbar-toggler {
+		font-size: 20px;
+	}
+
+	.banner-text {
+		width: 100%;
+	}
+
+	.icon-brand{
+		color: white !important;
+	}
+
+	.navbar-brand .first-name {
+		color: white !important;
+	}
+
+	.navbar-brand .second-name {
+		color: white !important;
+	}
+
+	#fondo-login {
+		height: auto;
+	}
+
 	
-	background-color:transparent;		
-	border-radius:30px;
-	border: 1.5px solid #000000;
-	color:#000000;
-	text-transform: capitalize;
-	padding:10px 31px;
-	/* text-shadow:0px 1px 0px #2f6627; */
-
 }
 
-#btnRegistrar .btn {
-	background-color:transparent;		
-	border-radius:30px;
-	border: 1.5px solid #ffffff;
-	color:#ffffff;
-	text-transform: capitalize;
-	padding:10px 31px;
-	
-	/* text-shadow:0px 1px 0px #2f6627; */
-}
-/* fomulario */
-.panel{ 
-	
-	background: white; 
-	border-radius: 3px; 
-	box-shadow: 0px 25px 42px rgba(0,0,0,0.2);
-	 
+.register-text {
+	width: 100%;
 }
 
-html {
-	scroll-behavior: smooth;
+.register-text h1{
+	font-size: 18px;
+	font-family: 'Nunito';
+	color: #757575;
 }
 
-.div.col{
-	height: 10vh !important;
+.register-text a {
+	color: #00BFA5;
+}
+
+.nav-link {
+	font-size: 16px;
+	font-family: "Nunito";
+	border-bottom: 4px solid transparent;
+}
+
+.nav-link:hover{
+	border-bottom: 4px solid #0277bd;
 }

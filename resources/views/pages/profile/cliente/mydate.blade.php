@@ -1,118 +1,129 @@
 @extends('layouts.dashboard')
 @section('page-title', 'Mis citas')
-@section('title', 'Mi citas')
+@section('title', 'Mis citas')
 @section('citas', 'active-item')
-@section('boton-agregar')
-<button class="btn btn-success btn-sm btn-rounded m-0 float-right" data-target="#modalCita" data-toggle="modal">
-    <i class="fas fa-plus"></i> Nueva cita
-</button>
-@endsection
 @section('contenido')
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card mt-4">
-        <div class="card-body">
-            <div class="container-fluid">
-                <p class="page-subtitle mb-4 text-center">Agendadas</p>
-    
-                @if($citas_agendadas->count() > 0)
-                    <div class="card">
-                        <div class="card-body p-0">
-                            
-                            @foreach($citas_agendadas as $cita)
-                                <div class="row ml-0 mr-0 mt-4 mb-1">
-                                    <div class="col-6 col-lg-3 text-center mb-3">
-                                        <div>
-                                            <i class="fas fa-toolbox fa-2x yellow-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Servicio </b> <br>
-                                            <span class="grey-text">{{ $cita->servicio }}</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-6 col-lg-3 text-center mb-3">
-                                        <div>
-                                            <i class="fas fa-calendar-day fa-2x blue-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Fecha cita</b> <br>
-                                            <span class="grey-text">{{ $cita->fecha }}</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-6 col-lg-3 text-center mb-3">
-                                        <div>
-                                            <i class="fas fa-clock fa-2x green-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Hora atención</b> <br>
-                                            <span class="grey-text">{{ $cita->hora_inicio }}</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-6 col-lg-3 text-center mb-3">
-                                        <div>
-                                            <i class="fas fa-id-card fa-2x red-text mb-2"></i>
-                                        </div>
-                                        <p class="card-text black-text"> 
-                                            <b>Responsable</b> <br>
-                                            <span class="grey-text">{{ $cita->name.' '.$cita->lastname }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            @endforeach
+    <ul class="nav nav-tabs border-0" id="custom-profile-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#nuevas" role="tab" aria-controls="home"
+            aria-selected="true"> <i class="far fa-calendar-plus mr-2 fa-fw"></i>  Recientes </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+            aria-selected="false"> <i class="far fa-calendar-check mr-2 fa-fw"></i>  Agendadas </a>
+        </li>
+    </ul>
+    <div class="tab-content pl-0 pr-0" id="myTabContent">
+        <div class="tab-pane fade show active" id="nuevas" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row p-0 m-0">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mb-4 pl-0">
+                    <div class="card info-card-default z-depth-0">
+                        <div class="card-body">
+                            <div class="md-form my-0 text-center new-date-button">
+                                <button type="button" class="btn z-depth-0" data-toggle="modal" data-target="#modalCita">
+                                    <i class="far fa-calendar-plus fa-3x mb-3"></i> <br>
+                                    <span class="grey-text">Solicitar servicio</span> 
+                                </button>
+                            </div>
                         </div>
                     </div>
-                @else
-                    <blockquote class="blockquote bq-warning">
-                        <p class="bq-title">No posee citas agendadas</p>
-                        <p>
-                            Despues de realizar su solicitud estas quedan pendientes de su confirmación y que se les asigne personal, fechas y horarios.
-                        </p>
-                    </blockquote>
-                @endif
+                </div>
+                @foreach(Auth::user()->servicios as $servicio)
+                    @if($servicio->pivot['estado_cita'] == 'Nueva')
+                    <div class="col-lg-3 mb-4 pl-0">
+                        <div class="card info-card z-depth-0 p-2">
+                            <div class="card-header border-0 white">
+                                <div class="icon-date float-right">
+                                    <a href="" class="delete-button-alt">
+                                        <i class="fas fa-times float-right"></i>
+                                    </a>
+                                </div>
+                                <div class="title-card">{{ $servicio->tipo }}</div>
+                                <hr class="white">
+                            </div>
+                            <div class="card-body">
+                                <h1 class="info-card-title mb-2 text-left">{{ $servicio->nombre }}</h1>
+                                <div class="info-card-body text-left">
+                                    <div class="info-card-text">
+                                        {{ $servicio->pivot['descripcion'] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer white border-0">
+                                @if($servicio->pivot['estado_whatsapp'] == 1)
+                                    <span data-toggle="popover-hover" data-content="Whatsapp habilitado">
+                                        <i class="fab fa-whatsapp float-right fa-fw icon-wsp"></i>
+                                    </span>
+                                @endif
+
+                                <p class="card-footer-text">
+                                    <i class="fa fa-check fa-fw"></i> {{ $servicio->pivot['estado_cita'] }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
+
+                @include('pages.agenda.create')
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row p-0 m-0">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mb-4 pl-0">
+                    <div class="card info-card-default z-depth-0">
+                        <div class="card-body">
+                            <div class="md-form my-0 text-center new-date-button">
+                                <button type="button" class="btn z-depth-0" data-toggle="modal" data-target="#modalCita">
+                                    <i class="far fa-calendar-plus fa-3x mb-3"></i> <br>
+                                    <span class="grey-text">Solicitar servicio</span> 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach($servicios as $servicio)
+                    @if($servicio->pivot['estado_cita'] == 'Agendada')
+                    <div class="col-lg-3 mb-4 pl-0">
+                        <div class="card info-card z-depth-0 p-2">
+                            <div class="card-header border-0 white">
+                                <div class="icon-date float-right">
+                                    <a href="" class="delete-button-alt">
+                                        <i class="fas fa-times float-right"></i>
+                                    </a>
+                                </div>
+                                <div class="title-card">{{ $servicio->tipo }}</div>
+                                <hr class="white">
+                            </div>
+                            <div class="card-body">
+                                <h1 class="info-card-title mb-2 text-left">{{ $servicio->nombre }}</h1>
+                                <div class="info-card-body text-left">
+                                    <div class="info-card-text">
+                                        {{ $servicio->pivot['descripcion'] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer white border-0">
+                                @if($servicio->pivot['estado_whatsapp'] == 1)
+                                    <span data-toggle="popover-hover" data-content="Whatsapp habilitado">
+                                        <i class="fab fa-whatsapp float-right fa-fw icon-wsp"></i>
+                                    </span>
+                                @endif
+
+                                <p class="card-footer-text">
+                                    <i class="fa fa-check fa-fw"></i> {{ $servicio->pivot['estado_cita'] }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
+
                 @include('pages.agenda.create')
             </div>
         </div>
     </div>
 </div>
-<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 mb-3">
-    <div class="card mt-4">
-        <div class="card-body">
-            <div class="container-fluid">
-                
-                @if($citas_nuevas->count() > 0)
-                    <p class="page-subtitle mb-3 text-center">
-                        Nuevas solicitudes
-                    </p>
 
-                    @foreach ($citas_nuevas as $cita)
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h6 class="card-title grey-text">
-                                    <b>N° de solicitud:</b> {{$cita->idcita}}
-                                    <i class="fas fa-edit grey-text float-right"></i> 
-                                </h6>
-                                <p class="card-text mb-0"><b>Servicio:</b> {{$cita->servicio}}</p>
-                                @if($cita->descripcion == NULL)
-                                    <p class="card-text"><b>Descripción:</b> Sin descripción</p>
-                                @else
-                                    <p class="card-text"><b>Descripción:</b> {{$cita->descripcion}}</p>
-                                @endif
-                                
-                                <a href="{{ url("/cancelar/{$cita->idcita}") }}" class="btn btn-sm float-center btn-danger w-30 m-0">Cancelar</a>
-                            </div>
-                        </div>
-                    @endforeach
-                    
-                    <div colspan="5">{{ $citas_nuevas->links('vendor.pagination.bootstrap-4') }}</div>
-                @else
-                    <blockquote class="blockquote bq-warning">
-                        <p class="bq-title">No tiene nuevas solicitudes</p>
-                        <p>
-                            Una vez realice una nueva solicitud estas aparaceran aquí.
-                        </p>
-                    </blockquote>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

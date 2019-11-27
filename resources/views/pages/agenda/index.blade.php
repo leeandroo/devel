@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
-@section('titulo', 'Gestión de agenda')
+@section('page-title', 'Mis citas')
+@section('title', 'Mis citas')
+@section('citas', 'active-item')
 @section('contenido')
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">

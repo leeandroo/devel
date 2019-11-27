@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $table = "user";
-    protected $primaryKey = "iduser";
+    protected $primaryKey = "id";
     public $timestamps = false;
 
     /**
@@ -23,7 +23,15 @@ class User extends Authenticatable
         'name',
         'lastname',
         'rut',
-        'type'
+        'type',
+        'descripcion',
+        'profesion',
+        'nacionalidad',
+        'nacimiento',
+        'telefono',
+        'calle',
+        'imagen',
+        'numero_calle'
     ];
 
     /**
@@ -34,4 +42,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function servicios()
+    {
+        return $this->belongsToMany('App\Servicio')->withPivot("estado_whatsapp", "estado_cita", "descripcion");
+    }
 }
