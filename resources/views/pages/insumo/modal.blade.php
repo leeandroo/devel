@@ -30,9 +30,9 @@
 
 </style>
 
-<div id="modal-delete-{{$insumo->idinsumo}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-delete-{{$insumo->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <form method="POST" action="{{ url("insumo/{$insumo->idinsumo}") }}">  
+    <form method="POST" action="{{ url("insumo/{$insumo->id}") }}">  
                       
         {{ method_field('DELETE') }}
         
@@ -52,7 +52,7 @@
                         <p>Daras de baja el siguiente insumo:</p>
                         </div>
                         <ul>
-                            <li>ID: {{$insumo->idcategoria}}</li>
+                            <li>ID: {{$insumo->id}}</li>
                             <li>NOMBRE: {{$insumo->nombre}}</li>
                         </ul>
                     </div>                    

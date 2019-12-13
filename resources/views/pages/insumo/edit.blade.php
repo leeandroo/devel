@@ -10,7 +10,7 @@
                     <h1 class="sub-title my-4">Editar Insumo: {{ $insumo->nombre }}</h1>
 
 
-                    <form method="POST" action="{{ url("insumo/{$insumo->idinsumo}") }}">
+                    <form method="POST" action="{{ url("insumo/{$insumo->id}") }}">
                         {{ method_field('PUT') }}
                         
                         {!! csrf_field() !!}
@@ -27,10 +27,10 @@
                                         <select class="custom-select" name="categoria">                                            
                                             @foreach ($categorias as $categoria) 
                                                 
-                                                @if ( $categoria->idcategoria == $insumo->idcategoria )
-                                                    <option value="{{ $categoria->idcategoria }}" selected>{{ $categoria->nombre }}</option>                        
+                                                @if ( $categoria->id == $insumo->idcategoria )
+                                                    <option value="{{ $categoria->id }}" selected>{{ $categoria->nombre }}</option>                        
                                                 @else
-                                                    <option value="{{ $categoria->idcategoria }}">{{ $categoria->nombre }}</option>                        
+                                                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>                        
                                                 @endif  
                                                 
                                             @endforeach

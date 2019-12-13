@@ -28,6 +28,11 @@ class InterfazController extends Controller
 
     public function get_user_profile()
     {
+        if(Auth::user()->type == "Admin")
+        {
+            return view('pages.profile.admin.dashboard');
+        }
+        
         return view('pages.profile.user-profile');
     }
 

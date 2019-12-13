@@ -30,9 +30,9 @@
 
 </style>
 
-<div id="modal-delete-{{$categoria->idcategoria}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal-delete-{{$categoria->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <form method="POST" action="{{ url("categoria/{$categoria->idcategoria}") }}">  
+    <form method="POST" action="{{ url("categoria/{$categoria->id}") }}">  
                       
         {{ method_field('DELETE') }}
         
@@ -52,7 +52,7 @@
                         <p>Eliminaras la siguiente categoria:</p>
                         </div>
                         <ul>
-                            <li>ID: {{$categoria->idcategoria}}</li>
+                            <li>ID: {{$categoria->id}}</li>
                             <li>NOMBRE: {{$categoria->nombre}}</li>
                             <li>DESCRIPCION: {{$categoria->descripcion}}</li>
                         </ul>

@@ -21,8 +21,8 @@ class InsumoController extends Controller
             ->where('nombre','LIKE','%'.$nombre.'%')
             ->where('idcategoria','LIKE','%'.$categoriaid.'%')
             ->where('estado', 'Disponible')
-            ->orderBy('idinsumo', 'DESC')
-            ->paginate(3);
+            ->orderBy('id', 'DESC')
+            ->paginate(8);
 		                            
             $categorias = DB::table('categoria')->get();
     
@@ -84,8 +84,8 @@ class InsumoController extends Controller
 
         $data = request()->all();
         $validator = Validator::make($data, [ 
-            'nombre' => ['required', 'max:45', Rule::unique('insumo')->ignore($insumo->idinsumo, 'idinsumo')],
-            'codigo' => ['required', 'max:45', Rule::unique('insumo')->ignore($insumo->idinsumo, 'idinsumo')], 
+            'nombre' => ['required', 'max:45', Rule::unique('insumo')->ignore($insumo->id, 'id')],
+            'codigo' => ['required', 'max:45', Rule::unique('insumo')->ignore($insumo->id, 'id')], 
             'stock' => ['required', 'max:45'],  
             'descripcion' => 'nullable|max:45',
             'precio' => 'required'

@@ -23,3 +23,5 @@ for (var j = 0; j < tabs.length; j++) {
 
 $(".button-collapse").sideNav();
 $('#message').modal('show');
+
+

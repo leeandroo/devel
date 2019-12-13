@@ -1,10 +1,10 @@
 
 
 
-<div class="card mt-4 ml-2 mr-2">
+<div class="card z-depth-0">
     <div class="card-body">
         <div class="container-fluid">
-            <h1 class="sub-title my-2">Ingresa una Nueva Categoria</h1>
+            <h1 class="title-card my-2">Nueva Categoria</h1>
             <form method="POST" action="{{ url('categoria/insertar') }}">
                 {!! csrf_field() !!}
                 <div class="form-group">
@@ -20,8 +20,8 @@
                     </div>
                 </div>
                 <div class="md-form my-0 text-center" id="btnformulario">
-                    <button type="submit" class="btn green white-text" id="btn-aceptar">Ingresar <i class="fa fa-paper-plane ml-2"></i></button>
-                    <button type="reset" class="btn red white-text" id="btn-cancelar">Cancelar <i class="fas fa-times ml-2"></i></button>
+                    <button type="submit" class="btn green white-text btn-block mb-4 mt-4" id="btn-aceptar">Ingresar <i class="fa fa-paper-plane ml-2"></i></button>
+
                 </div>
             </form>
         </div>

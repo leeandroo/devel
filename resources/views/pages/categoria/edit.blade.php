@@ -9,7 +9,7 @@
                 <div class="container-fluid">
                     <h1 class="sub-title my-4">Editar categoria: {{ $categoria->nombre }}</h1>
 
-                    <form method="POST" action="{{ url("categoria/{$categoria->idcategoria}") }}">
+                    <form method="POST" action="{{ url("categoria/{$categoria->id}") }}">
                         {{ method_field('PUT') }}
                         
                         {!! csrf_field() !!}

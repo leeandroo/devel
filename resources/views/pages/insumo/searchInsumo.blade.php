@@ -11,10 +11,10 @@
                     <option value="">--Selecciona una Categoria--</option>
                     @foreach ($categorias as $categoria) 
                         
-                        @if ( $categoria->idcategoria == $categoriaid )
-                            <option value="{{ $categoria->idcategoria }}" selected>{{ $categoria->nombre }}</option>                        
+                        @if ( $categoria->id == $categoriaid )
+                            <option value="{{ $categoria->id }}" selected>{{ $categoria->nombre }}</option>                        
                         @else
-                            <option value="{{ $categoria->idcategoria }}">{{ $categoria->nombre }}</option>                        
+                            <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>                        
                         @endif  
                         
                     @endforeach

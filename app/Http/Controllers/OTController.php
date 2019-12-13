@@ -34,6 +34,7 @@ class OTController extends Controller
         $cita = ServicioUser::find($id);
         $cita->user = User::find($cita->user_id);
         $cita->servicio = Servicio::find($cita->servicio_id);
+        $cita->insumos = Insumo::all();
         return view('pages.profile.details', compact('cita'));
     }
 
@@ -69,7 +70,7 @@ class OTController extends Controller
         return back()->with('message', array('title' => '¡Genial!', 'body'=>'Se ha agregado una nueva tarea.'));
     }
 
-    public function store_supplies(Request $request)
+    public function store_supplies($id, Request $request)
     {
         $insumo = Insumo::find($request->get('insumo'));
         $validator = Validator::make($request->all(), [
@@ -83,7 +84,7 @@ class OTController extends Controller
         }
         
         $tiene = Tiene::create([
-            'idorden_trabajo' => $request->get('idorden'),
+            'idorden_trabajo' => $id,
             'idinsumo' => $request->get('insumo'),
             'cantidad' => $request->get('cantidad')
         ]);
@@ -92,8 +93,8 @@ class OTController extends Controller
         $insumo->stock = $insumo->stock - $tiene->cantidad;
         $insumo->save();
 
-        $ot = OrdenTrabajo::find($tiene->idorden_trabajo);
-        $ot->precio = $ot->precio + ($tiene->cantidad*$insumo->precio);
+        $ot = ServicioUser::find($tiene->idorden_trabajo);
+        $ot->precio_total = $ot->precio_total + ($tiene->cantidad*$insumo->precio);
         $ot->save();
 
         return back()->with('message', array('title' => '¡Genial!', 'body'=>'Se ha agregado un nuevo insumo.'));
@@ -139,7 +140,7 @@ class OTController extends Controller
         $ot->servicio = Servicio::find($ot->servicio_id);
         $ot->user = User::find($ot->user_id);
         
-        $pdf = PDF::loadView('components.ot-pdf',['ot' => $ot]);
+        $pdf = PDF::loadView('components.ot-pdf',compact('ot'));
         return $pdf->stream('ot-pdf.pdf');
     }
 }

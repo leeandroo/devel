@@ -17,7 +17,7 @@
 								<label for="fecha" class="mt-1 mb-3 box-label">Responsable</label>
 								<hr class="mt-0 mb-4">
 							</div>	
-							@foreach(App\User::get()->where('estado', 1) as $responsable)
+							@foreach(App\User::get()->where('type', 'Trabajador')->where('estado', 1) as $responsable)
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 worker-list p-0 mb-4">
 									<div class="custom-control custom-radio align-middle float-right">
 										<input type="radio" class="custom-control-input" id="{{ $responsable->id }}" name="responsable" value="{{ $responsable->id }}" required>

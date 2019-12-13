@@ -17,7 +17,7 @@ class CategoriaController extends Controller
             $query=trim($request->get('searchText'));
             $categorias = DB::table('categoria')
             ->where('nombre','LIKE','%'.$query.'%')
-            ->orderBy('idcategoria', 'DESC')
+            ->orderBy('id', 'DESC')
             ->paginate(4);
             
             return view('pages.categoria.index', ["categorias"=>$categorias, "searchtext"=>$query]);

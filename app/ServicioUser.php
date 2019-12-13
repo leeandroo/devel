@@ -10,6 +10,7 @@ class ServicioUser extends Pivot
     protected $primaryKey = "id";
     protected $user;
     protected $servicio;
+    protected $insumos;
 
     public $timestamps = false;
 

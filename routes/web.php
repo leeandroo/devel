@@ -29,7 +29,7 @@ Route::post('/agendar/{id}', 'OTController@store');
 Route::get('/details/{id}', 'OTController@get_details');
 Route::get('/iniciar/{cita}', 'OTController@initialize_job');
 Route::post('/agregar/tareas/{cita}', 'OTController@store_activities');
-Route::post('/agregar/insumos/{cita}', 'OTController@store_supplies');
+Route::post('/agregar/insumos/{id}', 'OTController@store_supplies');
 Route::get('/eliminar/tareas/{ot}', 'OTController@delete_activities');
 Route::get('/eliminar/insumos/{ot}', 'OTController@delete_supplies');
 Route::post('/finalizar/{cita}', 'OTController@finalize_job');

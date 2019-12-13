@@ -21,7 +21,7 @@
             @endif
             
         </div>
-        <div class="mt-3 mb-3 text-center">
+        <div class="mt-3 text-center">
             <h4 class="title-card">{{ $cita->user->name.' '.$cita->user->lastname }}</h4>
             <p class="subtitle-card mb-2">{{ $cita->user->calle.', '.$cita->user->numero_calle }}</p>
             @if($cita->estado_whatsapp == 1)
@@ -32,6 +32,24 @@
                 <p class="text-red generic-text">WhatsApp inhabilitado</p>
             @endif
         </div>
+        <div class="card-body">
+            <div class="info-card-body">
+                <div class="mb-4">
+                    <h1 class="info-card-title mb-2 text-left">Servicio</h1>
+                    <p class="info-card-text">
+                        {{ $cita->servicio->nombre }} <br>
+                        <i class="far fa-bookmark mr-2 fa-fw"></i>{{$cita->servicio->tipo }}
+                    </p>
+                </div>
+                <div class="">
+                    <h1 class="info-card-title mb-2 text-left">Hora de atención</h1>
+                    <p class="info-card-text mb-0">
+                        <i class="far fa-clock mr-2"></i>{{ $cita->hora_inicio.' - '.$cita->hora_termino }}
+                    </p>
+                </div>
+                
+            </div>
+        </div> 
         <div class="card-footer white border-0 mt-0">
             <div id="btn-date">
                 <a type="button" class="btn btn-block info-color white-text z-depth-0" href="{{ url('/descargar/'.$cita->id) }}">
@@ -47,25 +65,58 @@
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
             aria-selected="true">Información</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-            aria-selected="false">Detalle de atención</a>
-        </li>
+
     </ul>
     <div class="tab-content pl-0 pr-0" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <h1 class="title-card mt-2 mb-4">Servicio</h1>
-            
+            <div class="card-header white border-0 pl-5 pr-5 pt-4 pb-1">
+                <a class="btn btn-success btn-sm btn-rounded m-0 float-right" data-toggle="modal" data-target="#modalSupplies" >
+                    <i class="fas fa-plus"></i> Agregar insumo
+                </a>
+                <h1 class="title-card mt-2 mb-4">Materiales</h1>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    @if($cita->insumos->count() > 0)
+                    <table class="table table-responsive-sm ">
+                        <thead>
+                            <tr>
+                                <th class="table-title">Insumo</th>
+                                <th class="table-title">Cantidad</th>
+                                <th class="table-title">Precio </th>
+                                <th class="table-title">Costo final </th>
+                                <th class="table-title">Opciones </th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cita->insumos as $insumo)
+                                <tr>
+                                    <td class="table-text align-baseline">{{ $insumo->nombre }}</td>
+                                    <td class="table-text align-baseline">{{ $insumo->cantidad }}</td>
+                                    <td class="table-text align-baseline">{{ $insumo->precio}}</td>
+                                    <td class="table-text align-baseline">{{ $insumo->precio*$insumo->cantidad}}</td>
+                                    <td colspan="5" class="table-text align-baseline">
+                                        <a href="{{ url("/eliminar/insumos/{$cita->id}") }}" class="btn btn-sm danger-color white-text">Eliminar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                        <blockquote class="blockquote bq-warning">
+                            <p class="bq-title">No se han agregado insumos</p>
+                            <p>
+                                Despues de realizar su solicitud estas quedan pendientes de su confirmación y que se les asigne personal, fechas y horarios.
+                            </p>
+                        </blockquote>
+                    @endif
+                </div>
+            </div>
+            @include('pages.agenda.supplies')
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie
-            locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
-            blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
-            Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
-            PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
-            salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
-            sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-        </div>
+
     </div>
 </div>
 
